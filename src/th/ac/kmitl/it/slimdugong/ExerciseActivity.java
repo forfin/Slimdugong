@@ -9,7 +9,6 @@ import java.util.Map;
 
 import th.ac.kmitl.it.slimdugong.custom.widget.AthleticAdapter;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
-import th.ac.kmitl.it.slimdugong.database.SlimDugong;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
 import android.app.ActionBar;

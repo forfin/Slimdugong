@@ -15,6 +15,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import th.ac.kmitl.it.slimdugong.R;
+import th.ac.kmitl.it.slimdugong.SlimDugong;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.Barcode;
 import th.ac.kmitl.it.slimdugong.database.entity.Food;

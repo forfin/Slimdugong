@@ -1,7 +1,6 @@
 package th.ac.kmitl.it.slimdugong;
 
 
-import th.ac.kmitl.it.slimdugong.database.SlimDugong;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import th.ac.kmitl.it.slimdugong.database.TinyDB;
 import android.support.v7.app.ActionBarActivity;

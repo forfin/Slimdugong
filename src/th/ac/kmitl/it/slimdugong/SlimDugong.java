@@ -1,9 +1,10 @@
-package th.ac.kmitl.it.slimdugong.database;
+package th.ac.kmitl.it.slimdugong;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.Barcode;
 import th.ac.kmitl.it.slimdugong.database.entity.Food;

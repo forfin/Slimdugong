@@ -12,7 +12,6 @@ import java.util.Map;
 import th.ac.kmitl.it.slimdugong.R;
 import th.ac.kmitl.it.slimdugong.custom.widget.FoodAdapter;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
-import th.ac.kmitl.it.slimdugong.database.SlimDugong;
 import th.ac.kmitl.it.slimdugong.database.entity.Barcode;
 import th.ac.kmitl.it.slimdugong.database.entity.Food;
 import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
