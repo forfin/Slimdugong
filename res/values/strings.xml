@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SlimDugong</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="defualt_ok">OK</string>    
+    <string name="defualt_cancle">Cancle</string>  
+    
+    <string name="select_dish">SelectDish</string>
+    <string name="select_dish_action">Select Dish</string>
+    <string name="select_dish_scan_barcode">Scan Barcode</string>
+    <string name="select_dish_recent">recent</string>
+    <string name="select_dish_calories">calories</string>
+    <string name="select_dish_dialog_energy">Energy :</string>
+    
+    <string name="exercise">Exercise</string>
+    <string name="exercise_action">Exercise</string>
+    <string name="exercise_recent_tab">recent</string>
+    <string name="exercise_tab">Exercise</string>
+    <string name="exercise_hours">hour(s)</string>
+    <string name="exercise_miniutes">minute(s)</string>
+    
+    <string name="update_action">Update</string>
+    <string name="update_on_fetching">Fetching data from server&#8230;</string>
+    <string name="update_on_applying">Applying new data&#8230;</string>
+
+</resources>

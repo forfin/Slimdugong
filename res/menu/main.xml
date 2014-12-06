@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="th.ac.kmitl.it.slimdugong.MainActivity" >
+
+    <item
+        android:id="@+id/action_select_dish"
+        android:title="@string/select_dish_action"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/action_exercise"
+        android:title="@string/exercise_action"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/action_update"
+        android:title="@string/update_action"
+        app:showAsAction="never"/>
+
+</menu>
