@@ -2,6 +2,10 @@ package th.ac.kmitl.it.slimdugong.database.entity;
 
 public class FoodType {
 	
+	public static final String TABLE_NAME = "food_type";
+    public static final String COLUMN_NAME_ENTRY_ID = "ft_id";
+    public static final String COLUMN_NAME_ENTRY_NAME = "ft_name";
+	
 	private Integer foodTypeId;
     private String foodTypeName;
     

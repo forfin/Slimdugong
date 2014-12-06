@@ -23,6 +23,8 @@ import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
 import android.app.ProgressDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
 public class DatabaseManager {		
@@ -86,58 +88,67 @@ public class DatabaseManager {
 	
 	public void loadDatabase() {
 		if(!isDataAlreadyLoaded){
-			loadData();
+			loadDataFromSQLite();
 		}
 	}
 	
-	private void loadData() {
-        
-		int total = food_list_preference.getInt(TOTAL);
+	private void loadDataFromSQLite(){
+		SQLiteDatabaseHelper mDbHelper = new SQLiteDatabaseHelper(app);
+		SQLiteDatabase db = mDbHelper.getSQLiteDatabase();
+		
+		Cursor c = db.query(Food.TABLE_NAME, null, null, null, null, null, null);		
 		ArrayList<Food> foodList = new ArrayList<Food>();
-		for(int i=0;i<total;i++){
+		c.moveToPosition(-1);
+		while (c.moveToNext()) {
 			Food entity = new Food();
-			ArrayList<String> strP = food_list_preference.getList(i+"");
-			entity.setFoodId(Integer.valueOf(strP.get(0)));
-			entity.setFoodName(strP.get(1));
-			entity.setFoodCal(Integer.valueOf(strP.get(2)));
-			entity.setFoodTypeId(Integer.valueOf(strP.get(3)));
+			entity.setFoodId(c.getInt(c.getColumnIndexOrThrow(Food.COLUMN_NAME_ENTRY_ID)));
+			entity.setFoodName(c.getString(c.getColumnIndexOrThrow(Food.COLUMN_NAME_ENTRY_NAME)));
+			entity.setFoodCal(c.getInt(c.getColumnIndexOrThrow(Food.COLUMN_NAME_ENTRY_CAL)));
+			entity.setFoodTypeId(c.getInt(c.getColumnIndexOrThrow(Food.COLUMN_NAME_ENTRY_FOODTYPE_ID)));
 			foodList.add(entity);
 		}
+		c.close();
 		app.setFoodList(foodList);
 		
-		total = food_type_preference.getInt(TOTAL);
+		
+		c = db.query(FoodType.TABLE_NAME, null, null, null, null, null, null);		
 		ArrayList<FoodType> foodTypeList = new ArrayList<FoodType>();
-		for(int i=0;i<total;i++){
+		c.moveToPosition(-1);
+		while (c.moveToNext()) {
 			FoodType entity = new FoodType();
-			ArrayList<String> strP = food_type_preference.getList(i+"");
-			entity.setFoodTypeId(Integer.valueOf(strP.get(0)));
-			entity.setFoodTypeName(strP.get(1));
+			entity.setFoodTypeId(c.getInt(c.getColumnIndexOrThrow(FoodType.COLUMN_NAME_ENTRY_ID)));
+			entity.setFoodTypeName(c.getString(c.getColumnIndexOrThrow(FoodType.COLUMN_NAME_ENTRY_NAME)));
 			foodTypeList.add(entity);
 		}
+		c.close();
 		app.setFoodTypeList(foodTypeList);
 		
-		total = barcode_preference.getInt(TOTAL);
+		
+		c = db.query(Barcode.TABLE_NAME, null, null, null, null, null, null);		
 		ArrayList<Barcode> barcodeList = new ArrayList<Barcode>();
-		for(int i=0;i<total;i++){
+		c.moveToPosition(-1);
+		while (c.moveToNext()) {
 			Barcode entity = new Barcode();
-			ArrayList<String> strP = barcode_preference.getList(i+"");
-			entity.setBarId(Integer.valueOf(strP.get(0)));
-			entity.setBarCode(strP.get(1));
-			entity.setFoodId(Integer.valueOf(strP.get(2)));
+			entity.setBarId(c.getInt(c.getColumnIndexOrThrow(Barcode.COLUMN_NAME_ENTRY_ID)));
+			entity.setBarCode(c.getString(c.getColumnIndexOrThrow(Barcode.COLUMN_NAME_ENTRY_CODE)));
+			entity.setFoodId(c.getInt(c.getColumnIndexOrThrow(Barcode.COLUMN_NAME_ENTRY_FOOD_ID)));
 			barcodeList.add(entity);
 		}
+		c.close();
 		app.setBarcodeList(barcodeList);
 		
-		total = athletic_preference.getInt(TOTAL);
+		
+		c = db.query(Athletic.TABLE_NAME, null, null, null, null, null, null);		
 		ArrayList<Athletic> athleticList = new ArrayList<Athletic>();
-		for(int i=0;i<total;i++){
+		c.moveToPosition(-1);
+		while (c.moveToNext()) {
 			Athletic entity = new Athletic();
-			ArrayList<String> strP = athletic_preference.getList(i+"");
-			entity.setAthId(Integer.valueOf(strP.get(0)));
-			entity.setAthName(strP.get(1));
-			entity.setAthBph(Integer.valueOf(strP.get(2)));
+			entity.setAthId(c.getInt(c.getColumnIndexOrThrow(Athletic.COLUMN_NAME_ENTRY_ID)));
+			entity.setAthName(c.getString(c.getColumnIndexOrThrow(Athletic.COLUMN_NAME_ENTRY_NAME)));
+			entity.setAthBph(c.getInt(c.getColumnIndexOrThrow(Athletic.COLUMN_NAME_ENTRY_BPH)));
 			athleticList.add(entity);
 		}
+		c.close();
 		app.setAthleticList(athleticList);
 		
 		isDataAlreadyLoaded = true;
@@ -316,7 +327,7 @@ public class DatabaseManager {
 			  // execution of result of Long time consuming operation
 			  // In this example it is the return value from the web service
 			  if(SUCESS.equals(result)){
-				  loadData();
+				  loadDataFromSQLite();
 				  dialog.dismiss();
 			  }else{
 				  dialog.setMessage(result);

@@ -1,0 +1,28 @@
+BEGIN TRANSACTION;
+CREATE TABLE `food_type` (
+  `ft_id` INTEGER PRIMARY KEY,
+  `ft_name` varchar(40) NOT NULL
+);
+INSERT INTO `food_type` VALUES ('1','ข้าว');
+CREATE TABLE `food` (
+  `food_id` INTEGER PRIMARY KEY,
+  `food_name` varchar(40) NOT NULL,
+  `food_cal` int(11) NOT NULL,
+  `food_type_id` int(11) NOT NULL,
+  FOREIGN KEY(`food_type_id`) REFERENCES `food_type`(`ft_id`)
+);
+INSERT INTO `food` VALUES ('1','ข้าวมันไก่ต้ม','300','1');
+INSERT INTO `food` VALUES ('2','ข้าวมันไก่ทอด','330','1');
+CREATE TABLE `barcode` (
+  `bar_id` INTEGER PRIMARY KEY,
+  `bar_code` varchar(100) NOT NULL,
+  `food_id` int(11) NOT NULL,
+  FOREIGN KEY(`food_id`) REFERENCES `food`(`food_id`)
+);
+CREATE TABLE `athletic` (
+  `ath_id` INTEGER PRIMARY KEY,
+  `ath_name` varchar(30) NOT NULL,
+  `ath_bph` int(11) DEFAULT '0'
+);
+INSERT INTO `athletic` VALUES ('1','วิ่ง','100');
+COMMIT;

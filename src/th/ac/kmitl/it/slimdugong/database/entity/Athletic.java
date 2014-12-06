@@ -2,9 +2,15 @@ package th.ac.kmitl.it.slimdugong.database.entity;
 
 public class Athletic {
 	
+	public static final String TABLE_NAME = "athletic";
+    public static final String COLUMN_NAME_ENTRY_ID = "ath_id";
+    public static final String COLUMN_NAME_ENTRY_NAME = "ath_name";
+    public static final String COLUMN_NAME_ENTRY_BPH = "ath_bph";
+    
 	private Integer AthId;
 	private String AthName;
 	private Integer AthBph;
+	
 	public Integer getAthId() {
 		return AthId;
 	}

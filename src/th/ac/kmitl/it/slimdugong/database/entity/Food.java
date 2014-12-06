@@ -2,11 +2,15 @@ package th.ac.kmitl.it.slimdugong.database.entity;
 
 public class Food {
 	
+	public static final String TABLE_NAME = "food";
+    public static final String COLUMN_NAME_ENTRY_ID = "food_id";
+    public static final String COLUMN_NAME_ENTRY_NAME = "food_name";
+    public static final String COLUMN_NAME_ENTRY_CAL = "food_cal";
+    public static final String COLUMN_NAME_ENTRY_FOODTYPE_ID = "food_type_id";
+	
 	private Integer foodId;
     private String foodName;
     private Integer foodCal;
-    
-	private Integer barcode;
 	private Integer foodTypeId;
     
     @Override
@@ -50,12 +54,6 @@ public class Food {
 	}
 	public void setFoodCal(Integer foodCal) {
 		this.foodCal = foodCal;
-	}
-	public Integer getBarcode() {
-		return barcode;
-	}
-	public void setBarcode(Integer barcode) {
-		this.barcode = barcode;
 	}
 	public Integer getFoodTypeId() {
 		return foodTypeId;

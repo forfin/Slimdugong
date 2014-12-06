@@ -2,6 +2,11 @@ package th.ac.kmitl.it.slimdugong.database.entity;
 
 public class Barcode {
 	
+	public static final String TABLE_NAME = "barcode";
+    public static final String COLUMN_NAME_ENTRY_ID = "bar_id";
+    public static final String COLUMN_NAME_ENTRY_CODE = "bar_code";
+    public static final String COLUMN_NAME_ENTRY_FOOD_ID = "food_id";
+	
 	private Integer barId;
 	private String barCode;
 	private Integer foodId;

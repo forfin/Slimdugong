@@ -9,8 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
 
 public class CreateCharacterActivity extends Activity {
 
@@ -36,7 +34,7 @@ public class CreateCharacterActivity extends Activity {
 				input.setLayoutParams(params);
 				alert.setView(input);
 
-				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 				  String value = input.getText().toString();
 				  // Do something with value!
@@ -51,8 +49,9 @@ public class CreateCharacterActivity extends Activity {
 
 				alert.show();
 			}
-		});
-		
+		});		
 	}
+	
+	
 
 }
