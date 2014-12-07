@@ -6,24 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.SoapFault;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
-import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
-
-import th.ac.kmitl.it.slimdugong.MainActivity;
 import th.ac.kmitl.it.slimdugong.R;
 import th.ac.kmitl.it.slimdugong.SlimDugong;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
@@ -32,47 +20,39 @@ import th.ac.kmitl.it.slimdugong.database.entity.Food;
 import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
+import th.ac.kmitl.it.slimdugong.database.entity.local.User;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class DatabaseManager {
 	
-    private static final String TOTAL = "TOTAL";    
-    private static final String URL_UPDATE = "https://dl.dropboxusercontent.com/s/geo8qml81gbd0z9/version.txt";
-    private static final String KEY_VERSION = "version";
+	public static final String KEY_TOTAL = "KEY_TOTAL";    
+    private static final String URL_CHECK_UPDATE = "https://dl.dropboxusercontent.com/s/geo8qml81gbd0z9/version.txt";
+    public static final String KEY_VERSION = "KEY_VERSION";
+    public static final String KEY_ISLOADED = "KEY_ISLOADED";
     
     private static SlimDugong app;
     private Activity activity;
     
-    private static final String DATABASE_FOODLIST = "DATABASE_FOODLIST";
-	private static final String DATABASE_FOODTYPE = "DATABASE_FOODTYPE";
-	private static final String DATABASE_CONSUME = "DATABASE_CONSUME";
-	private static final String DATABASE_BARCODE = "DATABASE_BARCODE";
-	private static final String DATABASE_ATHLETIC = "DATABASE_ATHLETIC";
-	private static final String DATABASE_EXERCISE = "DATABASE_EXERCISE";
-	private static final String DATABASE_VERSION = "DATABASE_VERSION";
-    
-    private TinyDB food_list_preference;
-    private TinyDB food_type_preference;
-    private TinyDB barcode_preference;
-    private TinyDB athletic_preference;
+    public static final String DATABASE_USER = "DATABASE_USER";
+    public static final String DATABASE_CONSUME = "DATABASE_CONSUME";
+	public static final String DATABASE_BARCODE = "DATABASE_BARCODE";
+	public static final String DATABASE_EXERCISE = "DATABASE_EXERCISE";
+	public static final String DATABASE_VERSION = "DATABASE_VERSION";
+	
+	private TinyDB user_preference;  
     private TinyDB consume_preference;  
     private TinyDB exercise_preference;
     private TinyDB version_preference;
     
     public DatabaseManager(SlimDugong app) {
     	DatabaseManager.app = app;
-    	this.food_list_preference = new TinyDB(app, DATABASE_FOODLIST, Context.MODE_PRIVATE);
-    	this.food_type_preference = new TinyDB(app, DATABASE_FOODTYPE, Context.MODE_PRIVATE);
-    	this.barcode_preference = new TinyDB(app, DATABASE_BARCODE, Context.MODE_PRIVATE);
-    	this.athletic_preference = new TinyDB(app, DATABASE_ATHLETIC, Context.MODE_PRIVATE);
+    	this.user_preference = new TinyDB(app, DATABASE_USER, Context.MODE_PRIVATE);
     	this.consume_preference = new TinyDB(app, DATABASE_CONSUME, Context.MODE_PRIVATE);
     	this.exercise_preference = new TinyDB(app, DATABASE_EXERCISE, Context.MODE_PRIVATE);
     	this.version_preference = new TinyDB(app, DATABASE_VERSION, Context.MODE_PRIVATE);
@@ -177,19 +157,19 @@ public class DatabaseManager {
 	}
 	
 	public void consumeCommit(Consume consume) {		
-		int total = consume_preference.getInt(TOTAL);
+		int total = consume_preference.getInt(KEY_TOTAL);
 		ArrayList<String> marray = new ArrayList<String>();		
 		marray.add(total+"");
 		marray.add(consume.getFoodId().toString());
 		marray.add(SlimDugong.dateFormat.format(consume.getConsumeTime()));
 		consume_preference.putList(total+"", marray);
-		consume_preference.putInt(TOTAL, total+1);
+		consume_preference.putInt(KEY_TOTAL, total+1);
 		
 	}
 	
 	public ArrayList<Consume> getAllConsume(){		
 		ArrayList<Consume> res = new ArrayList<Consume>();
-		int total = consume_preference.getInt(TOTAL);
+		int total = consume_preference.getInt(KEY_TOTAL);
 		try {
 			for(int i=0;i<total;i++){
 				Consume consume = new Consume();
@@ -207,7 +187,7 @@ public class DatabaseManager {
 	}
 	
 	public void exerciseCommit(Exercise exer) {		
-		int total = exercise_preference.getInt(TOTAL);
+		int total = exercise_preference.getInt(KEY_TOTAL);
 		ArrayList<String> marray = new ArrayList<String>();		
 		marray.add(total+"");
 		marray.add(exer.getAthId().toString());
@@ -215,12 +195,12 @@ public class DatabaseManager {
 		marray.add(exer.getExerDuration().toString());
 		marray.add(SlimDugong.dateFormat.format(exer.getExerTime()));
 		exercise_preference.putList(total+"", marray);
-		exercise_preference.putInt(TOTAL, total+1);				
+		exercise_preference.putInt(KEY_TOTAL, total+1);				
 	}
 	
 	public ArrayList<Exercise> getAllExercise(){		
 		ArrayList<Exercise> res = new ArrayList<Exercise>();
-		int total = exercise_preference.getInt(TOTAL);
+		int total = exercise_preference.getInt(KEY_TOTAL);
 		try {
 			for(int i=0;i<total;i++){
 				Exercise exer = new Exercise();
@@ -237,6 +217,14 @@ public class DatabaseManager {
 			return null;
 		}
 		return res;
+	}
+	
+	public boolean isNoUser() {
+		return user_preference.getString(User.KEY_NAME).equals("");
+	}
+	
+	public ArrayList<Integer> getUserCharacter() {
+		return user_preference.getListInt(User.KEY_CHARACTER);
 	}
 	
 	private class UpdateTaskRunner extends AsyncTask<String, String, String>{
@@ -265,7 +253,7 @@ public class DatabaseManager {
 			 String res = null;
 			 try {
 				 dialog.setMessage(app.getText(R.string.update_on_checking));;
-				 InputStream inputStream = getInputStream(URL_UPDATE);
+				 InputStream inputStream = getInputStream(URL_CHECK_UPDATE);
 				 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 				 long version = Long.valueOf(bufferedReader.readLine());
 				 if(version > version_preference.getLong(KEY_VERSION)){
@@ -306,6 +294,7 @@ public class DatabaseManager {
 					 inputStream.close();
 					 fileOutput.close();
 					 version_preference.putLong(KEY_VERSION, version);
+					 version_preference.putBoolean(KEY_ISLOADED, false);
 					 title = (String) app.getText(R.string.update_success) + " (" + version + ")";
 				 }else{
 					 title = (String) app.getText(R.string.update_already_latest) + " (" + version_preference.getLong(KEY_VERSION) + ")";
@@ -337,6 +326,7 @@ public class DatabaseManager {
 			  .setMessage(message)
 			  .setPositiveButton(R.string.defualt_ok, null)
 			  .show();
+			  
 		 }
 		  
 		  @Override

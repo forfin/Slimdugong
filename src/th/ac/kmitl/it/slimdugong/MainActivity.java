@@ -1,12 +1,9 @@
 package th.ac.kmitl.it.slimdugong;
 
 
+import th.ac.kmitl.it.slimdugong.custom.view.CharacterView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
-import th.ac.kmitl.it.slimdugong.database.TinyDB;
 import android.support.v7.app.ActionBarActivity;
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,12 +20,24 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadDatabase();
+        setContent();
     }
     
     private void loadDatabase(){
         mDatabaseManager = new DatabaseManager((SlimDugong)getApplication());
         ((SlimDugong)getApplication()).setDatabase(mDatabaseManager);
+        if(mDatabaseManager.isNoUser()){
+        	Intent intent = new Intent(MainActivity.this, CreateCharacterActivity.class);
+        	startActivity(intent);
+        	finish();
+        }
 	}
+    
+    private void setContent(){
+    	CharacterView character_view = (CharacterView) findViewById(R.id.character_view);
+    	character_view.setCharacter(mDatabaseManager.getUserCharacter());
+    	character_view.invalidate();
+    }
 
 
     @Override

@@ -9,6 +9,7 @@ import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.Barcode;
 import th.ac.kmitl.it.slimdugong.database.entity.Food;
 import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
+import th.ac.kmitl.it.slimdugong.database.entity.local.User;
 import android.app.Application;
 
 public class SlimDugong extends Application{
@@ -18,6 +19,7 @@ public class SlimDugong extends Application{
 	private ArrayList<FoodType> foodTypeList;
 	private ArrayList<Barcode> barcodeList;
 	private ArrayList<Athletic> athleticList;
+	private User user;
 	
 	public static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	
@@ -59,6 +61,14 @@ public class SlimDugong extends Application{
 
 	public void setAthleticList(ArrayList<Athletic> athleticList) {
 		this.athleticList = athleticList;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

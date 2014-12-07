@@ -8,10 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="th.ac.kmitl.it.slimdugong.MainActivity" >
 
-    <TextView
-        android:id="@+id/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <th.ac.kmitl.it.slimdugong.custom.view.CharacterView
+        android:id="@+id/character_view"
+        android:layout_width="233dp"
+        android:layout_height="333dp"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

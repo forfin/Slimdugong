@@ -1,18 +1,20 @@
 package th.ac.kmitl.it.slimdugong;
 
 import th.ac.kmitl.it.slimdugong.custom.view.CharacterView;
+import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
+import th.ac.kmitl.it.slimdugong.database.TinyDB;
+import th.ac.kmitl.it.slimdugong.database.entity.local.User;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
 
 public class CreateCharacterActivity extends Activity {
 	
@@ -196,14 +198,19 @@ public class CreateCharacterActivity extends Activity {
 	        	.setView(view)
 	        	.setPositiveButton(R.string.defualt_ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-				  String value = input.getText().toString();
-				  // Do something with value!
-				  }
+						TinyDB user_preference = new TinyDB(CreateCharacterActivity.this, DatabaseManager.DATABASE_USER, Context.MODE_PRIVATE);
+						user_preference.putString(User.KEY_NAME, input.getText().toString());
+						user_preference.putListInt(User.KEY_CHARACTER, new Integer[]{cBase, cHair, cTop, cBottom});
+						Intent intent = new Intent(CreateCharacterActivity.this, MainActivity.class);
+						character_view.clearMemoryAll();
+			        	startActivity(intent);
+			        	finish();
+					}
 				})
 				.setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
-				  public void onClick(DialogInterface dialog, int whichButton) {
-				    // Canceled.
-				  }
+					public void onClick(DialogInterface dialog, int whichButton) {
+						
+					}
 				})
 				.show();
 			}

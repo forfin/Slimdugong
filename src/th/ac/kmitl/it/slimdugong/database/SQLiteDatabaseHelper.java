@@ -13,8 +13,6 @@ import th.ac.kmitl.it.slimdugong.database.entity.Food;
 import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class SQLiteDatabaseHelper{
 	
@@ -38,10 +36,14 @@ public class SQLiteDatabaseHelper{
 	public SQLiteDatabaseHelper(Context context) {
 		this.context = context;
 		db = context.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-		onCreate();
+		TinyDB version_preference = new TinyDB(context, DatabaseManager.DATABASE_VERSION, Context.MODE_PRIVATE);
+		if(!version_preference.getBoolean(DatabaseManager.KEY_ISLOADED)){
+			update();
+			version_preference.putBoolean(DatabaseManager.KEY_ISLOADED, true);
+		}
 	}
 	
-	public void onCreate() {
+	private void update() {
 		
 		executeQueries(DROP_ALL_TABLE.split(END));
 		

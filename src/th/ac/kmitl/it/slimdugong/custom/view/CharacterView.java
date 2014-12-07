@@ -118,5 +118,38 @@ public class CharacterView extends View {
 		initialize();
 	}
 	
+	public void setCharacter(ArrayList<Integer> character) {
+		base = character.get(0);
+		idHair = character.get(1);
+		idTop = character.get(2);
+		idBottom = character.get(3);
+	}
+	
+	public void clearMemoryAll() {
+		releaseBitmap(m_base);
+		releaseBitmaps(m_hair_list);
+		releaseBitmaps(m_top_list);
+		releaseBitmaps(m_bottom_list);
+		releaseBitmap(f_base);
+		releaseBitmaps(f_hair_list);
+		releaseBitmaps(f_top_list);
+		releaseBitmaps(f_bottom_list);
+	}
+	
+	private void releaseBitmaps(List<Bitmap> bitmaps){
+		if(bitmaps != null){
+			for (Bitmap bitmap : bitmaps) {
+				releaseBitmap(bitmap);
+			}
+		}
+	}
+	
+	private void releaseBitmap(Bitmap bitmap){
+		if (bitmap != null) {
+			bitmap.recycle();
+			bitmap = null;
+		}
+	}
+	
 
 }

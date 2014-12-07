@@ -232,15 +232,18 @@ public class TinyDB {
 				Arrays.asList(mylist));
 		return gottenlist;
 	}
-
-	public void putListInt(String key, ArrayList<Integer> marray) {
+	
+	public void putListInt(String key, Integer[] marray) {
 		SharedPreferences.Editor editor = preferences.edit();
-		Integer[] mystringlist = marray.toArray(new Integer[marray.size()]);
 		// the comma like character used below is not a comma it is the SINGLE
 		// LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
 		// seprating the items in the list
-		editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
+		editor.putString(key, TextUtils.join("‚‗‚", marray));
 		editor.apply();
+	}
+
+	public void putListInt(String key, ArrayList<Integer> marray) {
+		putListInt(key, marray.toArray(new Integer[marray.size()]));
 	}
 	
 	public ArrayList<Integer> getListInt(String key) {
