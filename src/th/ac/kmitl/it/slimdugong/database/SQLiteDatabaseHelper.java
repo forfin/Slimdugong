@@ -22,8 +22,9 @@ public class SQLiteDatabaseHelper{
 	private SQLiteDatabase db;
 	
 	// If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 0;
     public static final String DATABASE_NAME = "slimdugong";
+    public static final String DATABASE_LASTEST = "latest_database";
     
     private final String DROP = "DROP TABLE IF EXISTS ";
     private final String END = ";";
@@ -46,7 +47,7 @@ public class SQLiteDatabaseHelper{
 		
 		InputStream inputStream;
 		try {
-			inputStream = context.openFileInput("lastest_database");
+			inputStream = context.openFileInput(DATABASE_LASTEST);
 		} catch (FileNotFoundException e) {
 			inputStream = context.getResources().openRawResource(R.raw.defualt_database);
 		}

@@ -180,7 +180,7 @@ public class ExerciseActivity extends ActionBarActivity {
 					tv.setTag(time);
 				}
 			});
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());            
+            AlertDialog.Builder builder = new AlertDialog.Builder(ExerciseActivity.this);            
             builder.setTitle(ath.getAthName())
             	   .setView(view)
             	   .setIcon(R.drawable.ic_action_dish)
@@ -198,7 +198,7 @@ public class ExerciseActivity extends ActionBarActivity {
                     	   
                        }
                    })
-                   .setNegativeButton(R.string.defualt_cancle, new DialogInterface.OnClickListener() {
+                   .setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                            // User cancelled the dialog
                        }

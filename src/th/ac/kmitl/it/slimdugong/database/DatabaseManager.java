@@ -1,9 +1,18 @@
 package th.ac.kmitl.it.slimdugong.database;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
@@ -14,6 +23,7 @@ import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import th.ac.kmitl.it.slimdugong.MainActivity;
 import th.ac.kmitl.it.slimdugong.R;
 import th.ac.kmitl.it.slimdugong.SlimDugong;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
@@ -22,74 +32,60 @@ import th.ac.kmitl.it.slimdugong.database.entity.Food;
 import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
-public class DatabaseManager {		
+public class DatabaseManager {
+	
+    private static final String TOTAL = "TOTAL";    
+    private static final String URL_UPDATE = "https://dl.dropboxusercontent.com/s/geo8qml81gbd0z9/version.txt";
+    private static final String KEY_VERSION = "version";
     
-    private static final String NAMESPACE = "http://sb/";
-    private static final String DOMAIN = "http://192.168.1.114:8080";
+    private static SlimDugong app;
+    private Activity activity;
     
-    private static final String URL_FOODLIST_SERVICE = DOMAIN + "/FoodFacadeService/FoodFacade?WSDL";
-    private static final String FOODLIST_SERVICE_GET_FOOD_LIST = "getFoodList";
-    
-    private static final String URL_FOODTYPE_SERVICE = DOMAIN + "/FoodTypeFacadeService/FoodTypeFacade?WSDL";
-    private static final String FOODTYPE_SERVICE_GET_FOOD_LIST = "getFoodTypeList";
-    
-    private static final String URL_BARCCODE_SERVICE = DOMAIN + "/BarcodeFacadeService/BarcodeFacade?WSDL";
-    private static final String BARCCODE_SERVICE_GET_BARCCODE_LIST = "getBarcodeList";    
-    
-    private static final String URL_ATHLETIC_SERVICE = DOMAIN + "/AthleticFacadeService/AthleticFacade?WSDL";
-    private static final String ATHLETIC_SERVICE_GET_BARCCODE_LIST = "getAthleticList";    
-    
-    private static final int NUM_ATTRIBUTE_FOOD = 5;
-    private static final int NUM_ATTRIBUTE_FOOD_TYPE = 2;
-    private static final int NUM_ATTRIBUTE_BARCODE = 3;
-    private static final int NUM_ATTRIBUTE_ATHLETIC = 3;
-    private static final String TOTAL = "TOTAL";
-    
-    private static final String SUCESS = "SUCESS";
-    
-    private boolean isDataAlreadyLoaded = false;
-    
-    private SlimDugong app;
-    private ProgressDialog dialog;
+    private static final String DATABASE_FOODLIST = "DATABASE_FOODLIST";
+	private static final String DATABASE_FOODTYPE = "DATABASE_FOODTYPE";
+	private static final String DATABASE_CONSUME = "DATABASE_CONSUME";
+	private static final String DATABASE_BARCODE = "DATABASE_BARCODE";
+	private static final String DATABASE_ATHLETIC = "DATABASE_ATHLETIC";
+	private static final String DATABASE_EXERCISE = "DATABASE_EXERCISE";
+	private static final String DATABASE_VERSION = "DATABASE_VERSION";
     
     private TinyDB food_list_preference;
     private TinyDB food_type_preference;
     private TinyDB barcode_preference;
     private TinyDB athletic_preference;
     private TinyDB consume_preference;  
-    private TinyDB exercise_preference;  
+    private TinyDB exercise_preference;
+    private TinyDB version_preference;
     
-    public DatabaseManager(SlimDugong app,
-    		TinyDB food_list_preference,
-    		TinyDB food_type_preference,
-    		TinyDB barcode_preference,
-    		TinyDB athletic_preference,
-    		TinyDB consume_preference,
-    		TinyDB exercise_preference) {
-    	this.app = app;
-    	this.food_list_preference = food_list_preference;
-    	this.food_type_preference = food_type_preference;
-    	this.barcode_preference = barcode_preference;
-    	this.athletic_preference = athletic_preference;
-    	this.consume_preference = consume_preference;
-    	this.exercise_preference = exercise_preference;
+    public DatabaseManager(SlimDugong app) {
+    	DatabaseManager.app = app;
+    	this.food_list_preference = new TinyDB(app, DATABASE_FOODLIST, Context.MODE_PRIVATE);
+    	this.food_type_preference = new TinyDB(app, DATABASE_FOODTYPE, Context.MODE_PRIVATE);
+    	this.barcode_preference = new TinyDB(app, DATABASE_BARCODE, Context.MODE_PRIVATE);
+    	this.athletic_preference = new TinyDB(app, DATABASE_ATHLETIC, Context.MODE_PRIVATE);
+    	this.consume_preference = new TinyDB(app, DATABASE_CONSUME, Context.MODE_PRIVATE);
+    	this.exercise_preference = new TinyDB(app, DATABASE_EXERCISE, Context.MODE_PRIVATE);
+    	this.version_preference = new TinyDB(app, DATABASE_VERSION, Context.MODE_PRIVATE);
 	}
 	
-	public void doUpdate(ProgressDialog dialog){
-		this.dialog = dialog;
-		AsyncTaskRunner runner = new AsyncTaskRunner();
+	public void doUpdate(Activity activity){
+		this.activity = activity;
+		UpdateTaskRunner runner = new UpdateTaskRunner();
 		runner.execute();
 	}
 	
 	public void loadDatabase() {
-		if(!isDataAlreadyLoaded){
-			loadDataFromSQLite();
-		}
+		loadDataFromSQLite();
 	}
 	
 	private void loadDataFromSQLite(){
@@ -150,8 +146,6 @@ public class DatabaseManager {
 		}
 		c.close();
 		app.setAthleticList(athleticList);
-		
-		isDataAlreadyLoaded = true;
 		
 	}
 	
@@ -245,109 +239,118 @@ public class DatabaseManager {
 		return res;
 	}
 	
-	 public boolean isDataAlreadyLoaded() {
-		return isDataAlreadyLoaded;
-	}
-
-	private class AsyncTaskRunner extends AsyncTask<String, String, String>{
+	private class UpdateTaskRunner extends AsyncTask<String, String, String>{
 		 
-		 private String resp;
+		 private String title;
+		 private String message;
+		 private int totalSize;
+		 private int downloadedSize;
+		 private ProgressDialog dialog;
 		 
-		 private SoapSerializationEnvelope callService(String ServiceName, String MethodName) throws HttpResponseException, IOException, XmlPullParserException{
-			 publishProgress(app.getString(R.string.update_on_fetching)); // Calls onProgressUpdate()
-			 SoapObject request = new SoapObject(NAMESPACE, MethodName);
-			 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			 envelope.setOutputSoapObject(request);
-			
-			 HttpTransportSE androidHttpTransport = new HttpTransportSE(ServiceName);
-
-			 androidHttpTransport.call(NAMESPACE + MethodName, envelope); // will make exceptions
+		 private InputStream getInputStream(String str_url) throws IOException{
+			 URL url = new URL(str_url);
+			 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 			 
-			 return envelope;
-		 }
-		 
-		 private void getPatternData(SoapSerializationEnvelope envelope, TinyDB preferece, int num_attribute ) throws SoapFault{
-			 if (envelope.bodyIn != null) {
-				 publishProgress(app.getString(R.string.update_on_applying));			 
-				 Vector<SoapPrimitive> result=(Vector<SoapPrimitive>)envelope.getResponse();
-				 
-				 ArrayList<String> res;				 
-				 int num = result.size()/num_attribute;					 
-
-				 for(int i=0;i<num;i++){
-					 res = new ArrayList<String>();
-					 for(int j=0;j<num_attribute;j++){
-						 int index = j+(i*num_attribute);
-						 res.add(result.get(index).toString());
-					 }						 
-					 preferece.putList(i+"", res);
-				 }
-				 preferece.putInt(TOTAL, num);
-			 }
-		 }
-		 
-		 private void getFoodList() throws HttpResponseException, IOException, XmlPullParserException{			 
-			 SoapSerializationEnvelope envelope = callService(URL_FOODLIST_SERVICE, FOODLIST_SERVICE_GET_FOOD_LIST);
-			 getPatternData(envelope, food_list_preference, NUM_ATTRIBUTE_FOOD);			 
-		 }
-		 
-		 private void getFoodTypeList() throws HttpResponseException, IOException, XmlPullParserException{			 
-			 SoapSerializationEnvelope envelope = callService(URL_FOODTYPE_SERVICE, FOODTYPE_SERVICE_GET_FOOD_LIST);
-			 getPatternData(envelope, food_type_preference, NUM_ATTRIBUTE_FOOD_TYPE);			 
-		 }
-		 
-		 private void getBarcodeList() throws HttpResponseException, IOException, XmlPullParserException{			 
-			 SoapSerializationEnvelope envelope = callService(URL_BARCCODE_SERVICE, BARCCODE_SERVICE_GET_BARCCODE_LIST);
-			 getPatternData(envelope, barcode_preference, NUM_ATTRIBUTE_BARCODE);			 
-		 }
-		 
-		 private void getAthleticList() throws HttpResponseException, IOException, XmlPullParserException{			 
-			 SoapSerializationEnvelope envelope = callService(URL_ATHLETIC_SERVICE, ATHLETIC_SERVICE_GET_BARCCODE_LIST);
-			 getPatternData(envelope, athletic_preference, NUM_ATTRIBUTE_ATHLETIC);			 
+			 //set up some things on the connection
+			 urlConnection.setRequestMethod("GET");
+			 urlConnection.setDoOutput(true);
+			 urlConnection.connect();
+			 totalSize = urlConnection.getContentLength();
+			 downloadedSize = 0;
+			 return urlConnection.getInputStream();
 		 }
 		 
 		 @Override
-		 protected String doInBackground(String... params) {	
-			 try {				 
-				 getFoodList();		
-				 getFoodTypeList();
-				 getBarcodeList();
-				 getAthleticList();
-				 resp = SUCESS;
-				 } 
-			 catch (Exception e) {
-				 e.printStackTrace();
-				 resp = e.getMessage();
+		 protected String doInBackground(String... params) {
+			 String res = null;
+			 try {
+				 dialog.setMessage(app.getText(R.string.update_on_checking));;
+				 InputStream inputStream = getInputStream(URL_UPDATE);
+				 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+				 long version = Long.valueOf(bufferedReader.readLine());
+				 if(version > version_preference.getLong(KEY_VERSION)){
+					 dialog.dismiss();
+					 
+					 activity.runOnUiThread(new Runnable() {
+						 public void run() {
+							  dialog = new ProgressDialog(activity);
+							  dialog.setTitle(R.string.update_action);
+							  dialog.setIcon(R.drawable.ic_action_update);
+							  dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+							  dialog.setMessage(app.getText(R.string.update_on_downloading));
+							  dialog.setProgress(0);
+							  dialog.setMax(totalSize);
+							  dialog.show();
+						 }
+					 });
+					 
+					 String url_download = bufferedReader.readLine();
+					 bufferedReader.close();
+					 inputStream.close();					 
+					 inputStream = getInputStream(url_download);
+					 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+					 
+					 FileOutputStream fileOutput = app.openFileOutput(SQLiteDatabaseHelper.DATABASE_LASTEST, Context.MODE_PRIVATE);
+					 byte[] buffer = new byte[1024];
+						
+					 int bufferLength = 0; //used to store a temporary size of the buffer
+						
+					 //now, read through the input buffer and write the contents to the file
+					 while ( (bufferLength = inputStream.read(buffer)) > 0 ){
+						 fileOutput.write(buffer, 0, bufferLength);
+						 downloadedSize += bufferLength;
+						 dialog.setProgress(downloadedSize);
+					 }
+					 bufferedReader.close();
+					 inputStream.close();
+					 fileOutput.close();
+					 version_preference.putLong(KEY_VERSION, version);
+					 title = (String) app.getText(R.string.update_success) + " (" + version + ")";
+				 }else{
+					 title = (String) app.getText(R.string.update_already_latest) + " (" + version_preference.getLong(KEY_VERSION) + ")";
 				 }
-			 return resp;
+			 } catch (MalformedURLException e) {
+				 title = (String) app.getText(R.string.defualt_title_error);
+				 message = e.getMessage();
+				 res = "";
+			 } catch (IOException e) {
+				 title = (String) app.getText(R.string.defualt_title_error);
+				 message = e.getMessage();
+				 res = "";
+			 } catch (NumberFormatException e) {
+				 title = (String) app.getText(R.string.defualt_title_error);
+				 message = e.getMessage();
+				 res = "";
 			 }
+			 
+			 return res;
+		 }
 		 
 		  @Override
 		  protected void onPostExecute(String result) {
-			  // execution of result of Long time consuming operation
-			  // In this example it is the return value from the web service
-			  if(SUCESS.equals(result)){
-				  loadDataFromSQLite();
-				  dialog.dismiss();
-			  }else{
-				  dialog.setMessage(result);
-			  }
-//			  Set<String> res = preferences.getStringSet("1", new HashSet<String>());
-//			  textView.setText(res.toString());
-			  }
+			  dialog.dismiss();
+			  int icon = result==null?R.drawable.ic_action_success:R.drawable.ic_action_alert;
+			  new AlertDialog.Builder(activity)
+			  .setTitle(title)
+			  .setIcon(icon)
+			  .setMessage(message)
+			  .setPositiveButton(R.string.defualt_ok, null)
+			  .show();
+		 }
 		  
 		  @Override
 		  protected void onPreExecute() {
-			  // Things to be done before execution of long running operation. For
-			  // example showing ProgessDialog
-			  }
+			  dialog = new ProgressDialog(activity);
+			  dialog.setTitle(R.string.update_action);
+			  dialog.setIcon(R.drawable.ic_action_update);
+			  dialog.show();
+		 }
 		  
 		  @Override
 		  protected void onProgressUpdate(String... text) {
 			  dialog.setMessage(text[0]);
-			  // Things to be done while execution of long running operation is in
-			  // progress. For example updating ProgessDialog
 		  }
-		}
-
+	}
+	
 }

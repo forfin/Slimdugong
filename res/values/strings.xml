@@ -5,7 +5,8 @@
     <string name="hello_world">Hello world!</string>
     
     <string name="defualt_ok">OK</string>    
-    <string name="defualt_cancle">Cancle</string>  
+    <string name="defualt_cancel">Cancel</string>
+    <string name="defualt_title_error">An error occurred</string>
     
     <string name="select_dish">SelectDish</string>
     <string name="select_dish_action">Select Dish</string>
@@ -22,7 +23,10 @@
     <string name="exercise_miniutes">minute(s)</string>
     
     <string name="update_action">Update</string>
-    <string name="update_on_fetching">Fetching data from server&#8230;</string>
-    <string name="update_on_applying">Applying new data&#8230;</string>
-
+    <string name="update_on_checking">Checking for update&#8230;</string>
+    <string name="update_on_downloading">Downloading new update&#8230;</string>
+    <string name="update_success">Update successfully</string>
+    <string name="update_already_latest">Already have a latest database version</string>
+    
+    
 </resources>

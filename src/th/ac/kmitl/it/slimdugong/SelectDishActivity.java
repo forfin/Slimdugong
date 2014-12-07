@@ -1,12 +1,10 @@
 package th.ac.kmitl.it.slimdugong;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import th.ac.kmitl.it.slimdugong.R;
@@ -222,7 +220,7 @@ public class SelectDishActivity extends ActionBarActivity {
                     	   mDatabaseManager.consumeCommit(c);
                        }
                    })
-                   .setNegativeButton(R.string.defualt_cancle, new DialogInterface.OnClickListener() {
+                   .setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                            // User cancelled the dialog
                        }

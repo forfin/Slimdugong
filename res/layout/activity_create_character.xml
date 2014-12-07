@@ -24,16 +24,19 @@
 	            android:orientation="vertical" >
 	
 	            <Button
+	                android:id="@+id/lt_h"
 	                android:layout_width="match_parent"
 	                android:layout_height="0dp"
 	                android:layout_weight="0.33"
 	                android:text="&lt;" />
 	            <Button
+	                android:id="@+id/lt_t"
 	                android:layout_width="match_parent"
 	                android:layout_height="0dp"
 	                android:layout_weight="0.33"
 	                android:text="&lt;" />
 	            <Button
+	                android:id="@+id/lt_b"
 	                android:layout_width="match_parent"
 	                android:layout_height="0dp"
 	                android:layout_weight="0.33"
@@ -53,16 +56,19 @@
 	            android:orientation="vertical" >
 	
 	            <Button
+	                android:id="@+id/rt_h"
 	                android:layout_width="match_parent"
 	                android:layout_height="0dp"
 	                android:layout_weight="0.33"
 	                android:text=">" />
 	            <Button
+	                android:id="@+id/rt_t"
 	                android:layout_width="match_parent"
 	                android:layout_height="0dp"
 	                android:layout_weight="0.33"
 	                android:text=">" />
 	            <Button
+	                android:id="@+id/rt_b"
 	                android:layout_width="match_parent"
 	                android:layout_height="0dp"
 	                android:layout_weight="0.33"
@@ -79,11 +85,13 @@
 	        android:layout_marginTop="10dp">
 	        
 	        <Button
+	            	android:id="@+id/btn_male"
 	                android:layout_width="0dp"
 	                android:layout_height="wrap_content"
 	                android:layout_weight="0.5"
 	                android:text="Male" />
 	        <Button
+	            	android:id="@+id/btn_female"
 	                android:layout_width="0dp"
 	                android:layout_height="wrap_content"
 	                android:layout_weight="0.5"

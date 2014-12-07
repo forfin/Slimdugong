@@ -4,6 +4,8 @@ package th.ac.kmitl.it.slimdugong;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import th.ac.kmitl.it.slimdugong.database.TinyDB;
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,13 +14,6 @@ import android.view.MenuItem;
 
 
 public class MainActivity extends ActionBarActivity {
-	
-	private static final String DATABASE_FOODLIST = "DATABASE_FOODLIST";
-	private static final String DATABASE_FOODTYPE = "DATABASE_FOODTYPE";
-	private static final String DATABASE_CONSUME = "DATABASE_CONSUME";
-	private static final String DATABASE_BARCODE = "DATABASE_BARCODE";
-	private static final String DATABASE_ATHLETIC = "DATABASE_ATHLETIC";
-	private static final String DATABASE_EXERCISE = "DATABASE_EXERCISE";
 	
 	private DatabaseManager mDatabaseManager;	
 	
@@ -31,14 +26,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
     private void loadDatabase(){
-		TinyDB foodListPreference = new TinyDB(getApplicationContext(), DATABASE_FOODLIST, MODE_PRIVATE);
-        TinyDB foodTypePreference = new TinyDB(getApplicationContext(), DATABASE_FOODTYPE, MODE_PRIVATE);
-        TinyDB barcodePreference = new TinyDB(getApplicationContext(), DATABASE_BARCODE, MODE_PRIVATE);
-        TinyDB consumePreference = new TinyDB(getApplicationContext(), DATABASE_CONSUME, MODE_PRIVATE);
-        TinyDB athleticPreference = new TinyDB(getApplicationContext(), DATABASE_ATHLETIC, MODE_PRIVATE);
-        TinyDB exercisePreference = new TinyDB(getApplicationContext(), DATABASE_EXERCISE, MODE_PRIVATE);
-        exercisePreference.clear();
-        mDatabaseManager = new DatabaseManager((SlimDugong)getApplication(), foodListPreference, foodTypePreference, barcodePreference, athleticPreference, consumePreference, exercisePreference);
+        mDatabaseManager = new DatabaseManager((SlimDugong)getApplication());
         ((SlimDugong)getApplication()).setDatabase(mDatabaseManager);
 	}
 
@@ -65,15 +53,8 @@ public class MainActivity extends ActionBarActivity {
         	mDatabaseManager.loadDatabase();
         	intent = new Intent(this, ExerciseActivity.class);
         	startActivity(intent);
-        }else if(id == R.id.action_update){        	
-        	
-        	ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-        	dialog.setTitle(R.string.update_action);
-        	dialog.setIcon(R.drawable.ic_action_update);
-        	dialog.show();            
-            
-            mDatabaseManager.doUpdate(dialog);
-        	
+        }else if(id == R.id.action_update){
+            mDatabaseManager.doUpdate(MainActivity.this);
         }
         return super.onOptionsItemSelected(item);
     }

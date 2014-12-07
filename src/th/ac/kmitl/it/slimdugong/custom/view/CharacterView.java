@@ -1,5 +1,8 @@
 package th.ac.kmitl.it.slimdugong.custom.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import th.ac.kmitl.it.slimdugong.R;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,11 +13,37 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CharacterView extends View {	
+public class CharacterView extends View {
 	
-	private Bitmap mHair;
-	private Bitmap mBase;
+	private int height;
+	private int width;
+	
+	public static final int M_BASE = R.drawable.sd_m_base;
+	public static final int[] M_HAIR_LIST = {R.drawable.sd_m_h1, R.drawable.sd_m_h2, R.drawable.sd_m_h3};
+	public static final int[] M_TOP_LIST = {R.drawable.sd_m_t1, R.drawable.sd_m_t2};
+	public static final int[] M_BOTTOM_LIST = {R.drawable.sd_m_l1, R.drawable.sd_m_l2};
+	
+	public static final int F_BASE = R.drawable.sd_f_base;
+	public static final int[] F_HAIR_LIST = {R.drawable.sd_f_h1, R.drawable.sd_f_h2, R.drawable.sd_f_h3};
+	public static final int[] F_TOP_LIST = {R.drawable.sd_f_t1};
+	public static final int[] F_BOTTOM_LIST = {R.drawable.sd_f_l1};
+	
+	private Bitmap m_base;
+	private List<Bitmap> m_hair_list;
+	private List<Bitmap> m_top_list;
+	private List<Bitmap> m_bottom_list;
+	
+	private Bitmap f_base;
+	private List<Bitmap> f_hair_list;
+	private List<Bitmap> f_top_list;
+	private List<Bitmap> f_bottom_list;
+	
 	private Paint mPaint;
+	
+	public int base;
+	public int idHair;
+	public int idTop;
+	public int idBottom;
 	
 	public CharacterView(Context context) {
 		super(context);
@@ -26,19 +55,46 @@ public class CharacterView extends View {
 		super(context, attrs, defStyleAttr);
 	}
 	
-	private void initialize(){				
-		System.err.println(getHeight()+"x"+getWidth());
-		mBase = getResizedBitmap(R.drawable.sd_f_base, getHeight(), getWidth());
-		mHair = getResizedBitmap(R.drawable.sd_f_h1, getHeight(), getWidth());
+	private void initialize(){
 		mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		height = getHeight();
+		width = getWidth();
+		
+		m_base = getResizedBitmap(M_BASE, height, width);
+		m_hair_list = getBitmapList(M_HAIR_LIST);
+		m_top_list = getBitmapList(M_TOP_LIST);
+		m_bottom_list = getBitmapList(M_BOTTOM_LIST);
+		
+		f_base = getResizedBitmap(F_BASE, height, width);
+		f_hair_list = getBitmapList(F_HAIR_LIST);
+		f_top_list = getBitmapList(F_TOP_LIST);
+		f_bottom_list = getBitmapList(F_BOTTOM_LIST);
+		
+	}
+	
+	private List<Bitmap> getBitmapList(int[] ls){
+		List<Bitmap> res = new ArrayList<Bitmap>();
+		for(int i : ls){
+			res.add(getResizedBitmap(i, height, width));
+		}
+		return res;
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		super.onDraw(canvas);
-		canvas.drawBitmap(mBase, 0, 0, mPaint);
-		canvas.drawBitmap(mHair, 0, 0, mPaint);
+		if(base==M_BASE){
+			canvas.drawBitmap(m_base, 0, 0, mPaint);
+			canvas.drawBitmap(m_hair_list.get(idHair), 0, 0, mPaint);
+			canvas.drawBitmap(m_bottom_list.get(idBottom), 0, 0, mPaint);
+			canvas.drawBitmap(m_top_list.get(idTop), 0, 0, mPaint);
+		}else{
+			canvas.drawBitmap(f_base, 0, 0, mPaint);
+			canvas.drawBitmap(f_hair_list.get(idHair), 0, 0, mPaint);
+			canvas.drawBitmap(f_bottom_list.get(idBottom), 0, 0, mPaint);
+			canvas.drawBitmap(f_top_list.get(idTop), 0, 0, mPaint);
+		}
 	}
 	
 	private Bitmap getResizedBitmap(int bitmapId, int newHeight, int newWidth){
