@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
     	CharacterView character_view = (CharacterView) findViewById(R.id.character_view);
     	character_view.setCharacter(mDatabaseManager.getUserCharacter());
     	character_view.invalidate();
+    	character_view.clearMemoryAll();
     }
 
 

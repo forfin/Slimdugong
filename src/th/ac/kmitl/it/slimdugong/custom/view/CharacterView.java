@@ -108,8 +108,7 @@ public class CharacterView extends View {
 	    // resize the bit map
 	    matrix.postScale(scaleWidth, scaleHeight);
 	    // recreate the new Bitmap
-	    Bitmap resizedBitmap = Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
-	    return resizedBitmap;
+	    return Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
 	}
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -150,6 +149,5 @@ public class CharacterView extends View {
 			bitmap = null;
 		}
 	}
-	
 
 }
