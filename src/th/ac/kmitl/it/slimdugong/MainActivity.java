@@ -20,7 +20,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadDatabase();
-        setContent();
     }
     
     private void loadDatabase(){
@@ -30,6 +29,8 @@ public class MainActivity extends ActionBarActivity {
         	Intent intent = new Intent(MainActivity.this, CreateCharacterActivity.class);
         	startActivity(intent);
         	finish();
+        }else{
+        	setContent();
         }
 	}
     
