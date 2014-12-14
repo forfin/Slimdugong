@@ -10,5 +10,10 @@
      android:paddingTop="2sp"
      android:paddingBottom="2sp"
      android:textSize="24sp"/>
+    <TextView
+       android:id="@+id/athCal"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="14sp"/>
 
 </LinearLayout>

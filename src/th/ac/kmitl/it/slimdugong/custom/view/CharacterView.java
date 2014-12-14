@@ -25,8 +25,8 @@ public class CharacterView extends View {
 	
 	public static final int F_BASE = R.drawable.sd_f_base;
 	public static final int[] F_HAIR_LIST = {R.drawable.sd_f_h1, R.drawable.sd_f_h2, R.drawable.sd_f_h3};
-	public static final int[] F_TOP_LIST = {R.drawable.sd_f_t1};
-	public static final int[] F_BOTTOM_LIST = {R.drawable.sd_f_l1};
+	public static final int[] F_TOP_LIST = {R.drawable.sd_f_t1, R.drawable.sd_f_t2};
+	public static final int[] F_BOTTOM_LIST = {R.drawable.sd_f_l1, R.drawable.sd_f_l2};
 	
 	private Bitmap m_base;
 	private List<Bitmap> m_hair_list;

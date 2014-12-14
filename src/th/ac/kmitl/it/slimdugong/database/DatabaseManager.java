@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -225,6 +226,22 @@ public class DatabaseManager {
 	
 	public ArrayList<Integer> getUserCharacter() {
 		return user_preference.getListInt(User.KEY_CHARACTER);
+	}
+	
+	public Date getLastCusumeDate(){
+		try {
+			return SlimDugong.dateFormat.parse(consume_preference.getList((consume_preference.getInt(KEY_TOTAL)-1)+"").get(2));
+		} catch (ParseException e) {
+			return null;
+		}		
+	}
+	
+	public Date getLastExerciseDate(){
+		try {
+			return SlimDugong.dateFormat.parse(exercise_preference.getList((exercise_preference.getInt(KEY_TOTAL)-1)+"").get(4));
+		} catch (ParseException e) {
+			return null;
+		}		
 	}
 	
 	private class UpdateTaskRunner extends AsyncTask<String, String, String>{

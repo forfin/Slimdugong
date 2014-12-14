@@ -28,8 +28,11 @@ public class AthleticAdapter extends ArrayAdapter<Athletic>{
 	    	}
 	    // Lookup view for data population
 	    TextView athName = (TextView) convertView.findViewById(R.id.athName);
+	    TextView athCal = (TextView) convertView.findViewById(R.id.athCal);
 	    // Populate the data into the template view using the data object
 	    athName.setText(user.getAthName());
+	    athCal.setText(R.string.exercise_bph);
+	    athCal.setText(user.getAthBph().toString()+" "+athCal.getText());
 	    // Return the completed view to render on screen
 	    return convertView;
 	}
