@@ -13,8 +13,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class CreateCharacterActivity extends Activity {
 	
@@ -35,15 +35,15 @@ public class CreateCharacterActivity extends Activity {
 		
 		character_view = (CharacterView) findViewById(R.id.character_view);
 		
-		Button lt_h = (Button) findViewById(R.id.lt_h);
-		Button lt_t = (Button) findViewById(R.id.lt_t);
-		Button lt_b = (Button) findViewById(R.id.lt_b);
-		Button rt_h = (Button) findViewById(R.id.rt_h);
-		Button rt_t = (Button) findViewById(R.id.rt_t);
-		Button rt_b = (Button) findViewById(R.id.rt_b);
-		Button btn_male = (Button) findViewById(R.id.btn_male);
-		Button btn_female = (Button) findViewById(R.id.btn_female);
-		Button btn_confirm = (Button) findViewById(R.id.btn_confirm);
+		ImageButton lt_h = (ImageButton) findViewById(R.id.lt_h);
+		ImageButton lt_t = (ImageButton) findViewById(R.id.lt_t);
+		ImageButton lt_b = (ImageButton) findViewById(R.id.lt_b);
+		ImageButton rt_h = (ImageButton) findViewById(R.id.rt_h);
+		ImageButton rt_t = (ImageButton) findViewById(R.id.rt_t);
+		ImageButton rt_b = (ImageButton) findViewById(R.id.rt_b);
+		ImageButton btn_male = (ImageButton) findViewById(R.id.btn_male);
+		ImageButton btn_female = (ImageButton) findViewById(R.id.btn_female);
+		ImageButton btn_confirm = (ImageButton) findViewById(R.id.btn_confirm);
 		
 		setBtnMale(btn_male);
 		setBtnFemale(btn_female);
@@ -65,7 +65,7 @@ public class CreateCharacterActivity extends Activity {
 		
 	}
 	
-	private void setBtnMale(Button btn_male){
+	private void setBtnMale(ImageButton btn_male){
 		btn_male.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -81,7 +81,7 @@ public class CreateCharacterActivity extends Activity {
 		});
 	}
 	
-	private void setBtnFemale(Button btn_female){
+	private void setBtnFemale(ImageButton btn_female){
 		btn_female.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -112,7 +112,7 @@ public class CreateCharacterActivity extends Activity {
 		character_view.invalidate();
 	}
 	
-	private void setLtH(Button lt_h){
+	private void setLtH(ImageButton lt_h){
 		lt_h.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -124,7 +124,7 @@ public class CreateCharacterActivity extends Activity {
 		});
 	}
 	
-	private void setLtT(Button lt_t){
+	private void setLtT(ImageButton lt_t){
 		lt_t.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -136,7 +136,7 @@ public class CreateCharacterActivity extends Activity {
 		});
 	}
 	
-	private void setLtB(Button lt_b){
+	private void setLtB(ImageButton lt_b){
 		lt_b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -148,7 +148,7 @@ public class CreateCharacterActivity extends Activity {
 		});
 	}
 	
-	private void setRtH(Button rt_h){
+	private void setRtH(ImageButton rt_h){
 		rt_h.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -160,7 +160,7 @@ public class CreateCharacterActivity extends Activity {
 		});
 	}
 	
-	private void setRtT(Button rt_t){
+	private void setRtT(ImageButton rt_t){
 		rt_t.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -172,7 +172,7 @@ public class CreateCharacterActivity extends Activity {
 		});
 	}
 	
-	private void setRtB(Button rt_b){
+	private void setRtB(ImageButton rt_b){
 		rt_b.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -185,7 +185,7 @@ public class CreateCharacterActivity extends Activity {
 	}
 	
 	
-	private void setBtnConfirm(Button btn_confirm){
+	private void setBtnConfirm(ImageButton btn_confirm){
 			btn_confirm.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -11,8 +11,6 @@
     <th.ac.kmitl.it.slimdugong.custom.view.CharacterView
         android:id="@+id/character_view"
         android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="300dp"/>
 
 </RelativeLayout>
