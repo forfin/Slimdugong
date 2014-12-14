@@ -44,7 +44,7 @@ public class CreateCharacterActivity extends Activity {
 		ImageButton btn_male = (ImageButton) findViewById(R.id.btn_male);
 		ImageButton btn_female = (ImageButton) findViewById(R.id.btn_female);
 		ImageButton btn_confirm = (ImageButton) findViewById(R.id.btn_confirm);
-		
+		//eiei
 		setBtnMale(btn_male);
 		setBtnFemale(btn_female);
 		
