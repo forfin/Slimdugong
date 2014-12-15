@@ -24,7 +24,7 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/statsname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/character_view"
@@ -35,40 +35,31 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/consume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/statsname"
+        android:layout_below="@+id/statsname"
         android:layout_marginTop="16dp"
         android:text="บริโภค :" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/burn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignLeft="@+id/consume"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="14dp"
         android:text="เผาผลาญ :" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/burn_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBaseline="@+id/burn"
+        android:layout_alignBottom="@+id/burn"
         android:layout_toLeftOf="@+id/status_workout"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/textView4"
-        android:text="TextView" />
+        android:text="3434534" />
 
     <ImageButton
         android:id="@+id/status_workout"
@@ -89,7 +80,7 @@
         android:src="@drawable/status_eat_gray" />
 
     <TextView
-        android:id="@+id/imageView1"
+        android:id="@+id/msg_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/name"
@@ -98,12 +89,21 @@
         android:background="@drawable/msg_box" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/status_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignBottom="@+id/msg_box"
         android:layout_alignRight="@+id/name"
         android:layout_marginBottom="70dp"
-        android:text="TextView" />
+        android:text="หิวจังเลย" />
+
+    <TextView
+        android:id="@+id/consume_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/consume"
+        android:layout_alignBottom="@+id/consume"
+        android:layout_alignLeft="@+id/burn_num"
+        android:text="324324" />
 
 </RelativeLayout>
