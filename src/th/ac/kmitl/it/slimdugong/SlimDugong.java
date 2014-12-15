@@ -12,7 +12,8 @@ import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
 import th.ac.kmitl.it.slimdugong.database.entity.local.User;
 import android.app.Application;
 
-public class SlimDugong extends Application{
+public class SlimDugong{
+	private static SlimDugong mInstance = null;
 	
 	private DatabaseManager database;
 	private ArrayList<Food> foodList;
@@ -22,6 +23,16 @@ public class SlimDugong extends Application{
 	private User user;
 	
 	public static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	
+	private SlimDugong(){
+	}
+	
+	public static SlimDugong getInstance() {
+		if(mInstance==null){
+			mInstance = new SlimDugong();
+		}
+		return mInstance;
+	}
 	
 	public DatabaseManager getDatabase() {
 		return database;

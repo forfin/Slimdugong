@@ -37,8 +37,10 @@ public class DatabaseManager {
     public static final String KEY_VERSION = "KEY_VERSION";
     public static final String KEY_ISLOADED = "KEY_ISLOADED";
     
-    private static SlimDugong app;
+    private Context mContext;
     private Activity activity;
+    
+    private SlimDugong app;
     
     public static final String DATABASE_USER = "DATABASE_USER";
     public static final String DATABASE_CONSUME = "DATABASE_CONSUME";
@@ -51,12 +53,13 @@ public class DatabaseManager {
     private TinyDB exercise_preference;
     private TinyDB version_preference;
     
-    public DatabaseManager(SlimDugong app) {
-    	DatabaseManager.app = app;
-    	this.user_preference = new TinyDB(app, DATABASE_USER, Context.MODE_PRIVATE);
-    	this.consume_preference = new TinyDB(app, DATABASE_CONSUME, Context.MODE_PRIVATE);
-    	this.exercise_preference = new TinyDB(app, DATABASE_EXERCISE, Context.MODE_PRIVATE);
-    	this.version_preference = new TinyDB(app, DATABASE_VERSION, Context.MODE_PRIVATE);
+    public DatabaseManager(Context mContext) {
+    	app = SlimDugong.getInstance();
+    	this.mContext = mContext;
+    	this.user_preference = new TinyDB(mContext, DATABASE_USER, Context.MODE_PRIVATE);
+    	this.consume_preference = new TinyDB(mContext, DATABASE_CONSUME, Context.MODE_PRIVATE);
+    	this.exercise_preference = new TinyDB(mContext, DATABASE_EXERCISE, Context.MODE_PRIVATE);
+    	this.version_preference = new TinyDB(mContext, DATABASE_VERSION, Context.MODE_PRIVATE);
 	}
 	
 	public void doUpdate(Activity activity){
@@ -70,7 +73,7 @@ public class DatabaseManager {
 	}
 	
 	private void loadDataFromSQLite(){
-		SQLiteDatabaseHelper mDbHelper = new SQLiteDatabaseHelper(app);
+		SQLiteDatabaseHelper mDbHelper = new SQLiteDatabaseHelper(mContext);
 		SQLiteDatabase db = mDbHelper.getSQLiteDatabase();
 		
 		Cursor c = db.query(Food.TABLE_NAME, null, null, null, null, null, null);		
@@ -166,6 +169,8 @@ public class DatabaseManager {
 		consume_preference.putList(total+"", marray);
 		consume_preference.putInt(KEY_TOTAL, total+1);
 		
+		user_preference.putLong(User.KEY_LAST_CONSUME_DATE, consume.getConsumeTime().getTime());
+		
 	}
 	
 	public ArrayList<Consume> getAllConsume(){		
@@ -196,7 +201,10 @@ public class DatabaseManager {
 		marray.add(exer.getExerDuration().toString());
 		marray.add(SlimDugong.dateFormat.format(exer.getExerTime()));
 		exercise_preference.putList(total+"", marray);
-		exercise_preference.putInt(KEY_TOTAL, total+1);				
+		exercise_preference.putInt(KEY_TOTAL, total+1);		
+		
+		user_preference.putLong(User.KEY_LAST_EXERCISE_DATE, exer.getExerTime().getTime());
+		
 	}
 	
 	public ArrayList<Exercise> getAllExercise(){		
@@ -228,20 +236,16 @@ public class DatabaseManager {
 		return user_preference.getListInt(User.KEY_CHARACTER);
 	}
 	
-	public Date getLastCusumeDate(){
-		try {
-			return SlimDugong.dateFormat.parse(consume_preference.getList((consume_preference.getInt(KEY_TOTAL)-1)+"").get(2));
-		} catch (ParseException e) {
-			return null;
-		}		
+	public String getUserName() {
+		return user_preference.getString(User.KEY_NAME);
 	}
 	
-	public Date getLastExerciseDate(){
-		try {
-			return SlimDugong.dateFormat.parse(exercise_preference.getList((exercise_preference.getInt(KEY_TOTAL)-1)+"").get(4));
-		} catch (ParseException e) {
-			return null;
-		}		
+	public Date getUserLastCosumeDate() {
+		return new Date(user_preference.getLong(User.KEY_LAST_CONSUME_DATE));
+	}
+	
+	public Date getUserLastExerciseDate() {
+		return new Date(user_preference.getLong(User.KEY_LAST_EXERCISE_DATE));
 	}
 	
 	private class UpdateTaskRunner extends AsyncTask<String, String, String>{
@@ -269,7 +273,7 @@ public class DatabaseManager {
 		 protected String doInBackground(String... params) {
 			 String res = null;
 			 try {
-				 dialog.setMessage(app.getText(R.string.update_on_checking));;
+				 dialog.setMessage(mContext.getText(R.string.update_on_checking));;
 				 InputStream inputStream = getInputStream(URL_CHECK_UPDATE);
 				 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 				 long version = Long.valueOf(bufferedReader.readLine());
@@ -282,7 +286,7 @@ public class DatabaseManager {
 							  dialog.setTitle(R.string.update_action);
 							  dialog.setIcon(R.drawable.ic_action_update);
 							  dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-							  dialog.setMessage(app.getText(R.string.update_on_downloading));
+							  dialog.setMessage(mContext.getText(R.string.update_on_downloading));
 							  dialog.setProgress(0);
 							  dialog.setMax(totalSize);
 							  dialog.show();
@@ -296,7 +300,7 @@ public class DatabaseManager {
 					 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
 					 
-					 FileOutputStream fileOutput = app.openFileOutput(SQLiteDatabaseHelper.DATABASE_LASTEST, Context.MODE_PRIVATE);
+					 FileOutputStream fileOutput = mContext.openFileOutput(SQLiteDatabaseHelper.DATABASE_LASTEST, Context.MODE_PRIVATE);
 					 byte[] buffer = new byte[1024];
 						
 					 int bufferLength = 0; //used to store a temporary size of the buffer
@@ -312,20 +316,20 @@ public class DatabaseManager {
 					 fileOutput.close();
 					 version_preference.putLong(KEY_VERSION, version);
 					 version_preference.putBoolean(KEY_ISLOADED, false);
-					 title = (String) app.getText(R.string.update_success) + " (" + version + ")";
+					 title = (String) mContext.getText(R.string.update_success) + " (" + version + ")";
 				 }else{
-					 title = (String) app.getText(R.string.update_already_latest) + " (" + version_preference.getLong(KEY_VERSION) + ")";
+					 title = (String) mContext.getText(R.string.update_already_latest) + " (" + version_preference.getLong(KEY_VERSION) + ")";
 				 }
 			 } catch (MalformedURLException e) {
-				 title = (String) app.getText(R.string.defualt_title_error);
+				 title = (String) mContext.getText(R.string.defualt_title_error);
 				 message = e.getMessage();
 				 res = "";
 			 } catch (IOException e) {
-				 title = (String) app.getText(R.string.defualt_title_error);
+				 title = (String) mContext.getText(R.string.defualt_title_error);
 				 message = e.getMessage();
 				 res = "";
 			 } catch (NumberFormatException e) {
-				 title = (String) app.getText(R.string.defualt_title_error);
+				 title = (String) mContext.getText(R.string.defualt_title_error);
 				 message = e.getMessage();
 				 res = "";
 			 }

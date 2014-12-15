@@ -44,7 +44,7 @@ public class ExerciseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
-        app = ((SlimDugong)getApplication());
+        app = SlimDugong.getInstance();
         
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

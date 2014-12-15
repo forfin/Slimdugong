@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,20 +25,53 @@ public class MainActivity extends ActionBarActivity {
     }
     
     private void loadDatabase(){
-        mDatabaseManager = new DatabaseManager((SlimDugong)getApplication());
-        ((SlimDugong)getApplication()).setDatabase(mDatabaseManager);
+        mDatabaseManager = new DatabaseManager(getApplicationContext());
+        SlimDugong.getInstance().setDatabase(mDatabaseManager);
         if(mDatabaseManager.isNoUser()){
         	Intent intent = new Intent(MainActivity.this, CreateCharacterActivity.class);
         	startActivity(intent);
         	finish();
         }else{
         	showCharacter();
+        	showStatus();
         }
 	}
     
     private void showStatus(){
+    	TextView status_text = (TextView) findViewById(R.id.status_text);
     	ImageButton status_workout = (ImageButton) findViewById(R.id.status_workout);
     	ImageButton status_eat = (ImageButton) findViewById(R.id.status_eat);
+    	
+    	StatusController.prepare();
+    	String statusText = StatusController.getCorrentStatusText();
+    	int statusConsum = StatusController.getCurrentConsumeStatus();
+    	int statusExercise = StatusController.getCurrentExerciseStatus();
+    	switch (statusConsum) {
+		case 0:
+			status_eat.setImageResource(R.drawable.status_eat_green);
+			break;
+		case 1:
+			status_eat.setImageResource(R.drawable.status_eat_gray);
+			break;
+		case 2:
+			status_eat.setImageResource(R.drawable.status_eat_red);
+			break;
+		}
+    	switch (statusExercise) {
+		case 0:
+			status_eat.setImageResource(R.drawable.status_workout_green);
+			break;
+		case 1:
+			status_eat.setImageResource(R.drawable.status_workout_gray);
+			break;
+		case 2:
+			status_eat.setImageResource(R.drawable.status_workout_red);
+			break;
+		}
+    	
+    	
+    	status_text.setText(statusText);
+    	
     }
     
     private void showCharacter(){
@@ -45,6 +79,9 @@ public class MainActivity extends ActionBarActivity {
     	character_view.setCharacter(mDatabaseManager.getUserCharacter());
     	character_view.invalidate();
     	character_view.clearMemoryAll();
+    	
+    	TextView name = (TextView) findViewById(R.id.name);
+    	name.setText(mDatabaseManager.getUserName());
     }
 
 

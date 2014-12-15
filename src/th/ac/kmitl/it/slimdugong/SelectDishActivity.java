@@ -47,7 +47,7 @@ public class SelectDishActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_dish);
-        app = ((SlimDugong)getApplication());
+        app = SlimDugong.getInstance();
         
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
