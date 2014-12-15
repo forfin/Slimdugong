@@ -8,17 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
-        android:id="@+id/BMINAME"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
-        android:text="BMI"
-        android:textSize="30dp" />
-
-    <TextView
         android:id="@+id/WEIGHTNAME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,5 +57,15 @@
         android:layout_marginTop="38dp"
         android:layout_toRightOf="@+id/WEIGHTNAME"
         android:text="Confirm" />
+
+    <TextView
+        android:id="@+id/BMINAME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:text="BMI"
+        android:textSize="30dp" />
 
 </RelativeLayout>
