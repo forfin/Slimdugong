@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -30,11 +31,16 @@ public class MainActivity extends ActionBarActivity {
         	startActivity(intent);
         	finish();
         }else{
-        	setContent();
+        	showCharacter();
         }
 	}
     
-    private void setContent(){
+    private void showStatus(){
+    	ImageButton status_workout = (ImageButton) findViewById(R.id.status_workout);
+    	ImageButton status_eat = (ImageButton) findViewById(R.id.status_eat);
+    }
+    
+    private void showCharacter(){
     	CharacterView character_view = (CharacterView) findViewById(R.id.character_view);
     	character_view.setCharacter(mDatabaseManager.getUserCharacter());
     	character_view.invalidate();

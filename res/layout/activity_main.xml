@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
-        android:layout_toLeftOf="@+id/imageButton2"
+        android:layout_toLeftOf="@+id/status_workout"
         android:text="TextView" />
 
     <TextView
@@ -71,31 +71,31 @@
         android:text="TextView" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/status_workout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/character_view"
-        android:layout_toLeftOf="@+id/imageButton1"
+        android:layout_toLeftOf="@+id/status_eat"
         android:background="@android:color/transparent"
         android:src="@drawable/status_workout_green" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/status_eat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/name"
-        android:layout_alignTop="@+id/imageButton2"
+        android:layout_alignTop="@+id/status_workout"
         android:background="@android:color/transparent"
         android:src="@drawable/status_eat_gray" />
 
-    <ImageView
+    <TextView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/name"
         android:layout_below="@+id/name"
         android:layout_marginTop="28dp"
-        android:src="@drawable/msg_box" />
+        android:background="@drawable/msg_box" />
 
     <TextView
         android:id="@+id/textView6"
