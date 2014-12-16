@@ -6,6 +6,7 @@
     <string name="defualt_ok">OK</string>    
     <string name="defualt_cancel">Cancel</string>
     <string name="defualt_title_error">An error occurred</string>
+    <string name="default_close">Close</string>
     
     <string name="select_dish">Select Dish</string>
     <string name="select_dish_action">Select Dish</string>
@@ -31,9 +32,17 @@
     <string name="create_character">Create Character</string>
     
     <string name="bmi_action">BMI Cal</string>
-    <string name="bmi_name">BMI Calculator</string>
+    <string name="bmi_name">BMI CALCULATOR</string>
     <string name="weight">Weight : </string>
     <string name="height">Height : </string>
-    
-    
+    <string name="error_msg">กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</string>
+    <string name ="bmi_result_name">ค่า BMI ของคุณเท่ากับ</string>
+    <string name ="bmi_result_1">น้ำหนักคุณน้อยมากๆ คุณแทบจะไม่มีน้ำหนักเลย คุณอาจจะกรอกค่าน้ำหนักหรือส่วนสูงผิด กรุณากรอกใหม่</string>
+    <string name ="bmi_result_2">น้ำหนักน้อยเกินไป ซึ่งอาจจะเกิดจากนักกีฬาที่ออกกำลังกายมาก และได้รับสารอาหารไม่เพียงพอ วิธีแก้ไขต้องรับประทานอาหารที่มีคุณภาพ และมีปริมาณพลังงานเพียงพอ และออกกำลังกายอย่างเหมาะสม</string>
+    <string name ="bmi_result_3">น้ำหนักปกติ และมีปริมาณไขมันอยู่ในเกณฑ์ปกติ มักจะไม่ค่อยมีโรคร้าย อุบัติการณ์ของโรคเบาหวาน ความดันโลหิตสูงต่ำกว่าผู้ที่อ้วนกว่านี้</string>
+    <string name ="bmi_result_4">โรคอ้วนระดับ1 และหากคุณมีเส้นรอบเอวมากกว่า                  90 ซม.(ชาย) 80 ซม.(หญิง) คุณจะมีโอกาศเกิดโรคความดัน เบาหวานสูง จำเป็นต้องควบคุมอาหาร และออกกำลังกาย</string>
+	<string name ="bmi_result_5">โรคอ้วนระดับ2 คุณเสี่ยงต่อการเกิดโรคที่มากับความอ้วน หากคุณมีเส้นรอบเอวมากกว่าเกณฑ์ปกติ                คุณจะเสี่ยงต่อการเกิดโรคสูง คุณต้องควบคุมอาหาร และออกกำลังกายอย่างจริงจัง</string>
+	<string name ="bmi_result_6">โรคอ้วนขั้นสูงสุด</string>
+	<string name ="bmi_thin_name">ผอม</string>
+	<string name ="bmi_fat_name">อ้วน</string>
 </resources>

@@ -1,17 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/bmiresultname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:text="Perfect"
-        android:textSize="30dp" />
+        android:id="@+id/invisibletext"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="36dp" >
+
+	    <SeekBar
+	        android:id="@+id/dialog_bmi_seekbar2"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_toLeftOf="@+id/bmi_fat"
+	        android:gravity="center"
+	        android:max="25"
+	       />
+
+	    <TextView
+	        android:id="@+id/bmi_fat"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/bmi_thin"
+	        android:layout_alignBottom="@+id/bmi_thin"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="16dp"
+	        android:text="@string/bmi_fat_name"
+	        android:textColor="#F76666"
+	        android:textSize="20dp" />
+
+	    <TextView
+	        android:id="@+id/bmi_thin"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="14dp"
+	        android:text="@string/bmi_thin_name"
+	        android:textColor="#2FEE6E"
+	        android:textSize="20dp" />
+
+	</RelativeLayout>
+
+	<RelativeLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="30dp" >
+
+     <TextView
+         android:id="@+id/dialog_bmi_text"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:layout_toLeftOf="@+id/dialog_bmi_number"
+         android:gravity="center"
+         android:paddingBottom="5dp"
+         android:textColor="#000000"
+         android:textSize="20dp" />
+
+     <TextView
+         android:id="@+id/dialog_bmi_number"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_centerVertical="true"
+         android:layout_marginRight="18dp"
+         android:text="text"
+         android:textColor="#FF0000"
+         android:textSize="20dp"  />
 
 </RelativeLayout>
+     <TextView
+         android:id="@+id/dialog_result_text"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/dialog_bmi_text"
+         android:layout_alignParentLeft="true"
+         android:gravity="center"
+         android:paddingBottom="5dp"
+         android:paddingTop="5dp"
+         android:textColor="#000000"
+         android:textSize="12dp" />
+
+	
+
+    
+
+</LinearLayout>
