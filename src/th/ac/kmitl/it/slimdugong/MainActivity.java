@@ -109,7 +109,10 @@ public class MainActivity extends ActionBarActivity {
         	startActivity(intent);
         }else if(id == R.id.action_update){
             mDatabaseManager.doUpdate(MainActivity.this);
-        }
+        }else if (id == R.id.action_bmi) {
+        	intent = new Intent(this, BMICalculatorActivity.class);
+        	startActivity(intent);
+		}
         return super.onOptionsItemSelected(item);
     }
 }

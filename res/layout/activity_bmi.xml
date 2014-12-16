@@ -15,7 +15,7 @@
         android:layout_below="@+id/BMINAME"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="50dp"
-        android:text="Weight : "
+        android:text="@string/weight"
         android:textSize="20dp" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_alignLeft="@+id/WEIGHTNAME"
         android:layout_below="@+id/WEIGHTNAME"
         android:layout_marginTop="31dp"
-        android:text="Height"
+        android:text="@string/height"
         android:textSize="20dp" />
 
     <EditText
@@ -65,7 +65,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="68dp"
-        android:text="BMI"
+        android:text="@string/bmi_name"
         android:textSize="30dp" />
 
 </RelativeLayout>

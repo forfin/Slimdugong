@@ -30,5 +30,10 @@
     
     <string name="create_character">Create Character</string>
     
+    <string name="bmi_action">BMI Cal</string>
+    <string name="bmi_name">BMI Calculator</string>
+    <string name="weight">Weight : </string>
+    <string name="height">Height : </string>
+    
     
 </resources>
