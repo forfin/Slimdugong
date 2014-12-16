@@ -2,11 +2,11 @@ package th.ac.kmitl.it.slimdugong;
 
 
 import th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView;
-import th.ac.kmitl.it.slimdugong.custom.view.CharacterView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
@@ -22,21 +22,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadDatabase();
+        
+        mDatabaseManager = SlimDugong.getInstance().getDatabase();
+    	showCharacter();
+    	showStatus();
+        
     }
-    
-    private void loadDatabase(){
-        mDatabaseManager = new DatabaseManager(getApplicationContext());
-        SlimDugong.getInstance().setDatabase(mDatabaseManager);
-        if(mDatabaseManager.isNoUser()){
-        	Intent intent = new Intent(MainActivity.this, CreateCharacterActivity.class);
-        	startActivity(intent);
-        	finish();
-        }else{
-        	showCharacter();
-        	showStatus();
-        }
-	}
     
     private void showStatus(){
     	TextView status_text = (TextView) findViewById(R.id.status_text);
@@ -83,6 +74,7 @@ public class MainActivity extends ActionBarActivity {
     
     private void showCharacter(){
     	CharacterMainView character_view = (CharacterMainView) findViewById(R.id.character_view);
+    	Log.d("Character mDatabaseManager.getUserCharacter() = ", mDatabaseManager.getUserCharacter().toString());
     	character_view.setCharacter(mDatabaseManager.getUserCharacter());
     	character_view.invalidate();
     	
