@@ -15,18 +15,28 @@ import android.view.View;
 
 public class CharacterView extends View {
 	
-	private int height;
-	private int width;
+	protected int height;
+	protected int width;
+	
+//	public static final int M_BASE = R.drawable.sd_m_base;
+//	public static final int[] M_HAIR_LIST = {R.drawable.sd_m_h1, R.drawable.sd_m_h2, R.drawable.sd_m_h3};
+//	public static final int[] M_TOP_LIST = {R.drawable.sd_m_t1, R.drawable.sd_m_t2, R.drawable.sd_m_t3};
+//	public static final int[] M_BOTTOM_LIST = {R.drawable.sd_m_l1, R.drawable.sd_m_l2, R.drawable.sd_m_l3};
+//	
+//	public static final int F_BASE = R.drawable.sd_f_base;
+//	public static final int[] F_HAIR_LIST = {R.drawable.sd_f_h1, R.drawable.sd_f_h2, R.drawable.sd_f_h3};
+//	public static final int[] F_TOP_LIST = {R.drawable.sd_f_t1, R.drawable.sd_f_t2, R.drawable.sd_f_t3};
+//	public static final int[] F_BOTTOM_LIST = {R.drawable.sd_f_l1, R.drawable.sd_f_l2, R.drawable.sd_f_l3};
 	
 	public static final int M_BASE = R.drawable.sd_m_base;
-	public static final int[] M_HAIR_LIST = {R.drawable.sd_m_h1, R.drawable.sd_m_h2, R.drawable.sd_m_h3};
-	public static final int[] M_TOP_LIST = {R.drawable.sd_m_t1, R.drawable.sd_m_t2, R.drawable.sd_m_t3};
-	public static final int[] M_BOTTOM_LIST = {R.drawable.sd_m_l1, R.drawable.sd_m_l2, R.drawable.sd_m_l3};
+	public static final int[] M_HAIR_LIST = {R.drawable.sd_m_h1};
+	public static final int[] M_TOP_LIST = {R.drawable.sd_m_t1};
+	public static final int[] M_BOTTOM_LIST = {R.drawable.sd_m_l1};
 	
 	public static final int F_BASE = R.drawable.sd_f_base;
-	public static final int[] F_HAIR_LIST = {R.drawable.sd_f_h1, R.drawable.sd_f_h2, R.drawable.sd_f_h3};
-	public static final int[] F_TOP_LIST = {R.drawable.sd_f_t1, R.drawable.sd_f_t2, R.drawable.sd_f_t3};
-	public static final int[] F_BOTTOM_LIST = {R.drawable.sd_f_l1, R.drawable.sd_f_l2, R.drawable.sd_f_l3};
+	public static final int[] F_HAIR_LIST = {R.drawable.sd_f_h1};
+	public static final int[] F_TOP_LIST = {R.drawable.sd_f_t1};
+	public static final int[] F_BOTTOM_LIST = {R.drawable.sd_f_l1};
 	
 	private Bitmap m_base;
 	private List<Bitmap> m_hair_list;
@@ -38,7 +48,7 @@ public class CharacterView extends View {
 	private List<Bitmap> f_top_list;
 	private List<Bitmap> f_bottom_list;
 	
-	private Paint mPaint;
+	protected Paint mPaint;
 	
 	public int base;
 	public int idHair;
@@ -97,7 +107,7 @@ public class CharacterView extends View {
 		}
 	}
 	
-	private Bitmap getResizedBitmap(int bitmapId, int newHeight, int newWidth){
+	protected Bitmap getResizedBitmap(int bitmapId, int newHeight, int newWidth){
 		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), bitmapId);
 	    int width = mBitmap.getWidth();
 	    int height = mBitmap.getHeight();
@@ -117,12 +127,7 @@ public class CharacterView extends View {
 		initialize();
 	}
 	
-	public void setCharacter(ArrayList<Integer> character) {
-		base = character.get(0);
-		idHair = character.get(1);
-		idTop = character.get(2);
-		idBottom = character.get(3);
-	}
+	
 	
 	public void clearMemoryAll() {
 		releaseBitmap(m_base);

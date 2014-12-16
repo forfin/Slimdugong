@@ -1,20 +1,58 @@
 package th.ac.kmitl.it.slimdugong;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
+import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
+import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
 import android.R.string;
+import android.text.format.DateUtils;
 
 public class StatusController {
+	
+	private static StatusController mInstance = null;
 	
 	private static Date lastConsumeDate;
 	private static Date lastExerciseDate;
 	
-	private static int todayEnergyEat;
-	private static int todayEnergyBurn;
-	
 	private static Date currentDate;
 	
-	public static void prepare(){
+	private StatusController(){
+		
+	}
+	
+	public int getTodayEnergyEat() {
+		int todayEnergyEat = 0;
+		ArrayList<Consume> consumes = SlimDugong.getInstance().getDatabase().getAllConsume();
+		for (Consume consume : consumes) {
+			if(DateUtils.isToday(consume.getConsumeTime().getTime())){
+				todayEnergyEat += consume.getFoodEnergy();
+			}
+		}
+		return todayEnergyEat;
+	}
+	
+	public int getTodayEnergyBurn() {
+		int todayEnergyBurn = 0;
+		ArrayList<Exercise> exercises = SlimDugong.getInstance().getDatabase().getAllExercise();
+		for (Exercise exercise : exercises) {
+			if(DateUtils.isToday(exercise.getExerTime().getTime())){
+				todayEnergyBurn += exercise.getEnegyBurn();
+			}
+		}
+		return todayEnergyBurn;
+	}
+	
+	public static StatusController getInstance() {
+		if(null == mInstance){
+			mInstance = new StatusController();
+		}
+		prepare();
+		return mInstance;
+	}
+	
+	private static void prepare(){
 		currentDate = new Date();
 		lastConsumeDate = SlimDugong.getInstance().getDatabase().getUserLastCosumeDate();
 		lastExerciseDate = SlimDugong.getInstance().getDatabase().getUserLastExerciseDate();
@@ -28,7 +66,7 @@ public class StatusController {
 		return difference(currentDate, d1);
 	}
 	
-	public static int getCurrentConsumeStatus(){
+	public int getCurrentConsumeStatus(){
 		long hour = difference(lastConsumeDate)/60;
 		if(hour<6){
 			// Fully
@@ -42,7 +80,7 @@ public class StatusController {
 		}
 	}
 	
-	public static int getCurrentExerciseStatus(){
+	public int getCurrentExerciseStatus(){
 		long hour = difference(lastExerciseDate)/60;
 		if(hour<24){
 			// Strong
@@ -56,7 +94,7 @@ public class StatusController {
 		}
 	}
 	
-	public static String getCorrentStatusText(){
+	public String getCorrentStatusText(){
 		if(lastConsumeDate.after(lastExerciseDate)){
 			int hungry = getCurrentConsumeStatus();
 			switch (hungry) {

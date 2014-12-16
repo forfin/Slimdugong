@@ -1,6 +1,7 @@
 package th.ac.kmitl.it.slimdugong;
 
 
+import th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView;
 import th.ac.kmitl.it.slimdugong.custom.view.CharacterView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import android.support.v7.app.ActionBarActivity;
@@ -42,10 +43,13 @@ public class MainActivity extends ActionBarActivity {
     	ImageButton status_workout = (ImageButton) findViewById(R.id.status_workout);
     	ImageButton status_eat = (ImageButton) findViewById(R.id.status_eat);
     	
-    	StatusController.prepare();
-    	String statusText = StatusController.getCorrentStatusText();
-    	int statusConsum = StatusController.getCurrentConsumeStatus();
-    	int statusExercise = StatusController.getCurrentExerciseStatus();
+    	StatusController status = StatusController.getInstance();
+    	String statusText = status.getCorrentStatusText();
+    	int statusConsum = status.getCurrentConsumeStatus();
+    	int statusExercise = status.getCurrentExerciseStatus();
+    	
+    	status_text.setText(statusText);
+    	
     	switch (statusConsum) {
 		case 0:
 			status_eat.setImageResource(R.drawable.status_eat_green);
@@ -59,26 +63,28 @@ public class MainActivity extends ActionBarActivity {
 		}
     	switch (statusExercise) {
 		case 0:
-			status_eat.setImageResource(R.drawable.status_workout_green);
+			status_workout.setImageResource(R.drawable.status_workout_green);
 			break;
 		case 1:
-			status_eat.setImageResource(R.drawable.status_workout_gray);
+			status_workout.setImageResource(R.drawable.status_workout_gray);
 			break;
 		case 2:
-			status_eat.setImageResource(R.drawable.status_workout_red);
+			status_workout.setImageResource(R.drawable.status_workout_red);
 			break;
 		}
     	
+    	TextView consume_num = (TextView) findViewById(R.id.consume_num);
+    	TextView burn_num = (TextView) findViewById(R.id.burn_num);
     	
-    	status_text.setText(statusText);
+    	consume_num.setText(status.getTodayEnergyEat() + "");
+    	burn_num.setText(status.getTodayEnergyBurn() + "");
     	
     }
     
     private void showCharacter(){
-    	CharacterView character_view = (CharacterView) findViewById(R.id.character_view);
+    	CharacterMainView character_view = (CharacterMainView) findViewById(R.id.character_view);
     	character_view.setCharacter(mDatabaseManager.getUserCharacter());
     	character_view.invalidate();
-    	character_view.clearMemoryAll();
     	
     	TextView name = (TextView) findViewById(R.id.name);
     	name.setText(mDatabaseManager.getUserName());

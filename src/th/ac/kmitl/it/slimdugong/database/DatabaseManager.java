@@ -166,10 +166,14 @@ public class DatabaseManager {
 		marray.add(total+"");
 		marray.add(consume.getFoodId().toString());
 		marray.add(SlimDugong.dateFormat.format(consume.getConsumeTime()));
+		marray.add(consume.getFoodEnergy().toString());
 		consume_preference.putList(total+"", marray);
 		consume_preference.putInt(KEY_TOTAL, total+1);
 		
 		user_preference.putLong(User.KEY_LAST_CONSUME_DATE, consume.getConsumeTime().getTime());
+		user_preference.putInt(User.KEY_TODAY_ENERGY_EAT,
+				user_preference.getInt(User.KEY_TODAY_ENERGY_EAT) +
+				consume.getFoodEnergy());
 		
 	}
 	
@@ -182,7 +186,8 @@ public class DatabaseManager {
 				ArrayList<String> marray = consume_preference.getList(i+"");
 				consume.setConsumeId(Integer.valueOf(marray.get(0)));
 				consume.setFoodId(Integer.valueOf(marray.get(1)));
-				consume.setConsumeTime(SlimDugong.dateFormat.parse(marray.get(2)));				
+				consume.setConsumeTime(SlimDugong.dateFormat.parse(marray.get(2)));			
+				consume.setFoodEnergy(Integer.valueOf(marray.get(3)));		
 				res.add(consume);
 			}
 		} catch (ParseException e) {
@@ -204,6 +209,9 @@ public class DatabaseManager {
 		exercise_preference.putInt(KEY_TOTAL, total+1);		
 		
 		user_preference.putLong(User.KEY_LAST_EXERCISE_DATE, exer.getExerTime().getTime());
+		user_preference.putInt(User.KEY_TODAY_ENERGY_BURN,
+				user_preference.getInt(User.KEY_TODAY_ENERGY_BURN) +
+				exer.getEnegyBurn());
 		
 	}
 	

@@ -91,6 +91,11 @@ public class SelectDishActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //No call for super(). Bug on API Level > 11.
+    }
+    
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
     	IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 		//check we have a valid result
@@ -103,7 +108,7 @@ public class SelectDishActivity extends ActionBarActivity {
 			if(null != b){
 				
 				Food food = mDatabaseManager.getFoodById(b.getFoodId());
-				new DishSelectedDialogFragment(food).show(getSupportFragmentManager(), null);
+				DishSelectedDialog(food).show();
 				
 			}else{
 				
@@ -184,7 +189,7 @@ public class SelectDishActivity extends ActionBarActivity {
 					// TODO Auto-generated method stub
 					
 					Food food = (Food) parent.getItemAtPosition(position);
-					new DishSelectedDialogFragment(food).show(getSupportFragmentManager(), null);
+					DishSelectedDialog(food).show();
 					
 				}
 			});
@@ -198,36 +203,26 @@ public class SelectDishActivity extends ActionBarActivity {
 		}   	
     }
     
-    public class DishSelectedDialogFragment extends DialogFragment {
-    	
-    	Food food;
-    	
-    	DishSelectedDialogFragment(Food food){
-    		super();
-    		this.food = food;
-    	}
-    	
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());            
-            builder.setTitle(food.getFoodName())
-            	   .setMessage(SelectDishActivity.this.getText(R.string.select_dish_dialog_energy) + " " + food.getFoodCal())
-            	   .setIcon(R.drawable.ic_action_dish)
-                   .setPositiveButton(R.string.defualt_ok, new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                    	   Consume c = new Consume(Integer.valueOf(food.getFoodId()), new Date());
-                    	   mDatabaseManager.consumeCommit(c);
-                       }
-                   })
-                   .setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           // User cancelled the dialog
-                       }
-                   });
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
+    public Dialog DishSelectedDialog(final Food food) {
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(SelectDishActivity.this);            
+        builder.setTitle(food.getFoodName())
+        	   .setMessage(SelectDishActivity.this.getText(R.string.select_dish_dialog_energy) + " " + food.getFoodCal())
+        	   .setIcon(R.drawable.ic_action_dish)
+               .setPositiveButton(R.string.defualt_ok, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                	   Consume c = new Consume(Integer.valueOf(food.getFoodId()), new Date());
+                	   c.setFoodEnergy(mDatabaseManager.getFoodById(food.getFoodId()).getFoodCal());
+                	   mDatabaseManager.consumeCommit(c);
+                   }
+               })
+               .setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       // User cancelled the dialog
+                   }
+               });
+        // Create the AlertDialog object and return it
+        return builder.create();
     }
     
     

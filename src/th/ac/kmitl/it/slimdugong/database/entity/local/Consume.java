@@ -7,6 +7,7 @@ public class Consume {
 	private Integer consumeId;
 	private Integer foodId;
 	private Date consumeTime;
+	private Integer foodEnergy;
 	
 	public Date getConsumeTime() {
 		return consumeTime;
@@ -60,6 +61,14 @@ public class Consume {
 		} else if (!consumeId.equals(other.consumeId))
 			return false;
 		return true;
+	}
+
+	public Integer getFoodEnergy() {
+		return foodEnergy;
+	}
+
+	public void setFoodEnergy(Integer foodEnergy) {
+		this.foodEnergy = foodEnergy;
 	}
 
 }
