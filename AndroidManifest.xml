@@ -44,6 +44,14 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
+            android:name=".BMICalculatorActivity"
+            android:label="@string/bmi_action"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".CreateCharacterActivity"
             android:label="@string/create_character" >
         </activity>
