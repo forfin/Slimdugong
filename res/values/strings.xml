@@ -3,7 +3,7 @@
 
     <string name="app_name">SlimDugong</string>
     <string name="facebook_app_id">1456855687868401</string>
-    <string name="facebook_shared_message">วันนี้เราทานไป %s แครอรี่ ออกกำลังกายไป %s แครอรี่ มาดูแลสุขภาพด้วยกันเถอะ</string>
+    <string name="facebook_shared_message">วันนี้เราทานไป %1$s แครอรี่ ออกกำลังกายไป %2$s แครอรี่ มาดูแลสุขภาพด้วยกันเถอะ</string>
     
     <string name="defualt_ok">OK</string>    
     <string name="defualt_cancel">Cancel</string>

@@ -93,6 +93,7 @@ public class MainActivity extends ActionBarActivity {
     private void setFacebookShareButton(){
     	 final ShareDialogBuilder builder = new FacebookDialog.ShareDialogBuilder(this)
 			.setName(getText(R.string.app_name).toString())
+			.setApplicationName(getText(R.string.app_name).toString())
 			.setLink("https://play.google.com/store");
 
 		share_facebook = (ImageButton) findViewById(R.id.bth_share_facebook);
