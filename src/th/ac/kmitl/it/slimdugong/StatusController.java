@@ -54,8 +54,8 @@ public class StatusController {
 	
 	private static void prepare(){
 		currentDate = new Date();
-		lastConsumeDate = SlimDugong.getInstance().getDatabase().getUserLastCosumeDate();
-		lastExerciseDate = SlimDugong.getInstance().getDatabase().getUserLastExerciseDate();
+		lastConsumeDate = SlimDugong.getInstance().getDatabase().getLastCosumeDate();
+		lastExerciseDate = SlimDugong.getInstance().getDatabase().getLastExerciseDate();
 	}
 	
 	private static long difference(Date d1, Date d2){

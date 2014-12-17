@@ -166,31 +166,23 @@ public class DatabaseManager {
 		ArrayList<String> marray = new ArrayList<String>();		
 		marray.add(total+"");
 		marray.add(consume.getFoodId().toString());
-		marray.add(SlimDugong.dateFormat.format(consume.getConsumeTime()));
+		marray.add(consume.getConsumeTime().getTime()+"");
 		marray.add(consume.getFoodEnergy().toString());
 		consume_preference.putList(total+"", marray);
-		consume_preference.putInt(KEY_TOTAL, total+1);
-		
-		user_preference.putLong(User.KEY_LAST_CONSUME_DATE, consume.getConsumeTime().getTime());
-		
+		consume_preference.putInt(KEY_TOTAL, total+1);		
 	}
 	
 	public ArrayList<Consume> getAllConsume(){		
 		ArrayList<Consume> res = new ArrayList<Consume>();
 		int total = consume_preference.getInt(KEY_TOTAL);
-		try {
-			for(int i=0;i<total;i++){
-				Consume consume = new Consume();
-				ArrayList<String> marray = consume_preference.getList(i+"");
-				consume.setConsumeId(Integer.valueOf(marray.get(0)));
-				consume.setFoodId(Integer.valueOf(marray.get(1)));
-				consume.setConsumeTime(SlimDugong.dateFormat.parse(marray.get(2)));			
-				consume.setFoodEnergy(Integer.valueOf(marray.get(3)));		
-				res.add(consume);
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return null;
+		for(int i=0;i<total;i++){
+			Consume consume = new Consume();
+			ArrayList<String> marray = consume_preference.getList(i+"");
+			consume.setConsumeId(Integer.valueOf(marray.get(0)));
+			consume.setFoodId(Integer.valueOf(marray.get(1)));
+			consume.setConsumeTime(new Date(Long.valueOf(marray.get(2))));			
+			consume.setFoodEnergy(Integer.valueOf(marray.get(3)));		
+			res.add(consume);
 		}
 		return res;
 	}
@@ -207,31 +199,23 @@ public class DatabaseManager {
 		marray.add(exer.getAthId().toString());
 		marray.add(exer.getEnegyBurn().toString());
 		marray.add(exer.getExerDuration().toString());
-		marray.add(SlimDugong.dateFormat.format(exer.getExerTime()));
+		marray.add(exer.getExerTime()+"");
 		exercise_preference.putList(total+"", marray);
-		exercise_preference.putInt(KEY_TOTAL, total+1);		
-		
-		user_preference.putLong(User.KEY_LAST_EXERCISE_DATE, exer.getExerTime().getTime());
-		
+		exercise_preference.putInt(KEY_TOTAL, total+1);				
 	}
 	
 	public ArrayList<Exercise> getAllExercise(){		
 		ArrayList<Exercise> res = new ArrayList<Exercise>();
 		int total = exercise_preference.getInt(KEY_TOTAL);
-		try {
-			for(int i=0;i<total;i++){
-				Exercise exer = new Exercise();
-				ArrayList<String> marray = exercise_preference.getList(i+"");
-				exer.setExerId(Integer.valueOf(marray.get(0)));
-				exer.setAthId(Integer.valueOf(marray.get(1)));
-				exer.setEnegyBurn(Integer.valueOf(marray.get(2)));
-				exer.setExerDuration(Integer.valueOf(marray.get(3)));
-				exer.setExerTime(SlimDugong.dateFormat.parse(marray.get(4)));				
-				res.add(exer);				
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return null;
+		for(int i=0;i<total;i++){
+			Exercise exer = new Exercise();
+			ArrayList<String> marray = exercise_preference.getList(i+"");
+			exer.setExerId(Integer.valueOf(marray.get(0)));
+			exer.setAthId(Integer.valueOf(marray.get(1)));
+			exer.setEnegyBurn(Integer.valueOf(marray.get(2)));
+			exer.setExerDuration(Integer.valueOf(marray.get(3)));
+			exer.setExerTime(new Date(Long.valueOf(marray.get(4))));				
+			res.add(exer);				
 		}
 		return res;
 	}
@@ -264,12 +248,16 @@ public class DatabaseManager {
 		return user_preference.getInt(User.KEY_HEIGHT);
 	}
 	
-	public Date getUserLastCosumeDate() {
-		return new Date(user_preference.getLong(User.KEY_LAST_CONSUME_DATE));
+	public Date getLastCosumeDate() {
+		int total = consume_preference.getInt(KEY_TOTAL);
+		ArrayList<String> marray = consume_preference.getList((total-1)+"");
+		return new Date(Long.valueOf(marray.get(2)));
 	}
 	
-	public Date getUserLastExerciseDate() {
-		return new Date(user_preference.getLong(User.KEY_LAST_EXERCISE_DATE));
+	public Date getLastExerciseDate() {
+		int total = exercise_preference.getInt(KEY_TOTAL);
+		ArrayList<String> marray = exercise_preference.getList((total-1)+"");
+		return new Date(Long.valueOf(marray.get(4)));
 	}
 	
 	private class UpdateTaskRunner extends AsyncTask<String, String, String>{

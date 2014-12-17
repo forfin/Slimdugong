@@ -8,9 +8,6 @@ public class User {
 	public static final String KEY_SEX = "sex";
 	public static final String KEY_CHARACTER = "character";
 	
-	public static final String KEY_LAST_CONSUME_DATE = "consume";
-	public static final String KEY_LAST_EXERCISE_DATE = "exercise";
-	
 	public static final String KEY_HEIGHT = "height";
 	public static final String KEY_WEIGHT = "weight";
 	
@@ -20,25 +17,9 @@ public class User {
 	private String name;
 	private String sex;
 	private int[] character;
-	private Date lastConsumeDate;
 	private Integer height;
 	private Integer weight;
 	
-	
-	public Date getLastConsumeDate() {
-		return lastConsumeDate;
-	}
-	public void setLastConsumeDate(Date lastConsumeDate) {
-		this.lastConsumeDate = lastConsumeDate;
-	}
-	private Date lastExerciseDate;
-	
-	public Date getLastExerciseDate() {
-		return lastExerciseDate;
-	}
-	public void setLastExerciseDate(Date lastExerciseDate) {
-		this.lastExerciseDate = lastExerciseDate;
-	}
 	public String getSex() {
 		return sex;
 	}
