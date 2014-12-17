@@ -199,7 +199,7 @@ public class DatabaseManager {
 		marray.add(exer.getAthId().toString());
 		marray.add(exer.getEnegyBurn().toString());
 		marray.add(exer.getExerDuration().toString());
-		marray.add(exer.getExerTime()+"");
+		marray.add(exer.getExerTime().getTime()+"");
 		exercise_preference.putList(total+"", marray);
 		exercise_preference.putInt(KEY_TOTAL, total+1);				
 	}
