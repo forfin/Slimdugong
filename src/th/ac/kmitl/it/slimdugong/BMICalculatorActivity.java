@@ -49,8 +49,8 @@ public class BMICalculatorActivity extends Activity {
 	    
     	            public void onClick(View arg0) {
     	            	try{
-    	            		int weight = Integer.valueOf(weightinput.getText().toString());
-	    	            	int height = Integer.valueOf(heightinput.getText().toString());
+    	            		int weight = Integer.valueOf(weightinput.getText().toString().trim());
+	    	            	int height = Integer.valueOf(heightinput.getText().toString().trim());
 	    	            	bmi = calBmi(weight,height);
 	    	            	createDialog().show();
     	            	}catch(NumberFormatException e){
