@@ -46,12 +46,16 @@ public class ConsumeAdapter extends ArrayAdapter<Consume>{
 	    long hour = min/60;
 	    
 	    chk_descripe2.setText(R.string.default_ago);
+	    String ago = chk_descripe2.getText().toString();
 	    if(sec<60){
-	    	chk_descripe2.setText(sec+" "+chk_descripe2.getText().toString());
+	    	chk_descripe2.setText(R.string.default_seconds);
+	    	chk_descripe2.setText(sec+" "+chk_descripe2.getText().toString()+" "+ago);
 	    }else if(min<60){
-	    	chk_descripe2.setText(min+" "+chk_descripe2.getText().toString());
+	    	chk_descripe2.setText(R.string.default_miniutes);
+	    	chk_descripe2.setText(min+" "+chk_descripe2.getText().toString()+" "+ago);
 	    }else if(hour<24){
-	    	chk_descripe2.setText(hour+" "+chk_descripe2.getText().toString());
+	    	chk_descripe2.setText(R.string.default_hours);
+	    	chk_descripe2.setText(hour+" "+chk_descripe2.getText().toString()+" "+ago);
 	    }else{
 	    	chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getConsumeTime()));	    
 	    }
