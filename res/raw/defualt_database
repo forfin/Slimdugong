@@ -1,4 +1,3 @@
-BEGIN TRANSACTION;
 CREATE TABLE `food_type` (
   `ft_id` INTEGER PRIMARY KEY,
   `ft_name` varchar(40) NOT NULL
@@ -132,5 +131,5 @@ INSERT INTO `athletic` VALUES ('23','วิ่งเหยาะๆ','600');
 INSERT INTO `athletic` VALUES ('24','เลื่อยไม้','515');
 INSERT INTO `athletic` VALUES ('25','เล่นวอลเล่ย์บอล','300');
 INSERT INTO `athletic` VALUES ('26','เล่นสเก็ตปกติ','420');
-;
-COMMIT;
+
+

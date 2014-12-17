@@ -9,7 +9,8 @@
         android:id="@+id/chkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:focusable="false"/>
+        android:focusable="false"
+        android:clickable="false"/>
     
     <LinearLayout 
 		 android:layout_width="wrap_content"
