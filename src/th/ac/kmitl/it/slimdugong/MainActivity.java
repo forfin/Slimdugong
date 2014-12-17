@@ -205,6 +205,9 @@ public class MainActivity extends ActionBarActivity {
 		}else if (id == R.id.action_edit_character) {
         	intent = new Intent(this, EditCharacterActivity.class);
         	startActivity(intent);
+		}else if (id == R.id.action_delete_action) {
+        	intent = new Intent(this, DeleteActionActivity.class);
+        	startActivity(intent);
 		}
         return super.onOptionsItemSelected(item);
     }

@@ -8,6 +8,7 @@ public class Consume {
 	private Integer foodId;
 	private Date consumeTime;
 	private Integer foodEnergy;
+	private String foodName;
 	
 	public Date getConsumeTime() {
 		return consumeTime;
@@ -71,4 +72,11 @@ public class Consume {
 		this.foodEnergy = foodEnergy;
 	}
 
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
 }

@@ -168,6 +168,7 @@ public class DatabaseManager {
 		marray.add(consume.getFoodId().toString());
 		marray.add(consume.getConsumeTime().getTime()+"");
 		marray.add(consume.getFoodEnergy().toString());
+		marray.add(consume.getFoodName().toString());
 		consume_preference.putList(total+"", marray);
 		consume_preference.putInt(KEY_TOTAL, total+1);		
 	}
@@ -181,7 +182,8 @@ public class DatabaseManager {
 			consume.setConsumeId(Integer.valueOf(marray.get(0)));
 			consume.setFoodId(Integer.valueOf(marray.get(1)));
 			consume.setConsumeTime(new Date(Long.valueOf(marray.get(2))));			
-			consume.setFoodEnergy(Integer.valueOf(marray.get(3)));		
+			consume.setFoodEnergy(Integer.valueOf(marray.get(3)));	
+			consume.setFoodName(marray.get(4));
 			res.add(consume);
 		}
 		return res;
@@ -200,6 +202,7 @@ public class DatabaseManager {
 		marray.add(exer.getEnegyBurn().toString());
 		marray.add(exer.getExerDuration().toString());
 		marray.add(exer.getExerTime().getTime()+"");
+		marray.add(exer.getAthName().toString());
 		exercise_preference.putList(total+"", marray);
 		exercise_preference.putInt(KEY_TOTAL, total+1);				
 	}
@@ -214,7 +217,8 @@ public class DatabaseManager {
 			exer.setAthId(Integer.valueOf(marray.get(1)));
 			exer.setEnegyBurn(Integer.valueOf(marray.get(2)));
 			exer.setExerDuration(Integer.valueOf(marray.get(3)));
-			exer.setExerTime(new Date(Long.valueOf(marray.get(4))));				
+			exer.setExerTime(new Date(Long.valueOf(marray.get(4))));
+			exer.setAthName(marray.get(5));
 			res.add(exer);				
 		}
 		return res;

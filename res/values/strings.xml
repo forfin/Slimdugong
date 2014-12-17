@@ -9,6 +9,8 @@
     <string name="defualt_cancel">Cancel</string>
     <string name="defualt_title_error">An error occurred</string>
     <string name="default_close">Close</string>
+    <string name="default_delete">Delete</string>
+    
     
     <string name="select_dish">Select Dish</string>
     <string name="select_dish_action">Select Dish</string>
@@ -22,6 +24,7 @@
     <string name="exercise_action">Exercise</string>
     <string name="exercise_recent_tab">recent</string>
     <string name="exercise_tab">Exercise</string>
+    <string name="consume_tab">Consume</string>
     <string name="exercise_bph">BPH</string>
     <string name="exercise_hours">hour(s)</string>
     <string name="exercise_miniutes">minute(s)</string>
@@ -54,5 +57,8 @@
 	
 	<string name="edit_character">Edit Character</string>
 	<string name="edit_character_action">Edit Character</string>
+	
+	<string name="delete_action">Delete Action</string>
+	<string name="delete_action_action">Delete Action</string>
 	
 </resources>

@@ -9,6 +9,8 @@ public class Exercise {
 	private Integer enegyBurn;
 	private Integer exerDuration;
 	private Date exerTime;
+	private String AthName;
+	
 	public Integer getExerId() {
 		return exerId;
 	}
@@ -61,6 +63,12 @@ public class Exercise {
 		} else if (!exerId.equals(other.exerId))
 			return false;
 		return true;
+	}
+	public String getAthName() {
+		return AthName;
+	}
+	public void setAthName(String athName) {
+		AthName = athName;
 	}	
 
 }

@@ -2,5 +2,7 @@ eclipse.preferences.version=1
 encoding//res/raw/defualt_database=UTF-8
 encoding//src/th/ac/kmitl/it/slimdugong/SelectDishActivity.java=UTF-8
 encoding//src/th/ac/kmitl/it/slimdugong/custom/widget/AthleticAdapter.java=UTF-8
+encoding//src/th/ac/kmitl/it/slimdugong/custom/widget/ConsumeAdapter.java=UTF-8
+encoding//src/th/ac/kmitl/it/slimdugong/custom/widget/ExerciseAdapter.java=UTF-8
 encoding//src/th/ac/kmitl/it/slimdugong/custom/widget/FoodAdapter.java=UTF-8
 encoding//src/th/ac/kmitl/it/slimdugong/database/TinyDB.java=UTF-8
