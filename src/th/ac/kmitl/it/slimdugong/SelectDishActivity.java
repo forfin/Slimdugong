@@ -61,8 +61,10 @@ public class SelectDishActivity extends ActionBarActivity {
     	actionBar.addTab(recent_tab);
     	
     	ArrayList<FoodType> ftlist = app.getFoodTypeList();
-    	FoodType ft0 = ftlist.remove(0);
-    	ftlist.add(ft0);
+    	if(ftlist.get(0).getFoodTypeId() == 0){
+    		FoodType ft0 = ftlist.remove(0);
+        	ftlist.add(ft0);
+    	}    	
         
         for(FoodType ft:ftlist){
         	if(ft.getFoodTypeId()!=0){
