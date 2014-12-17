@@ -82,9 +82,14 @@ public class BMICalculatorActivity extends Activity {
     	int bmiresult = (int) Double.parseDouble(bmi);
     	if(bmiresult <= 10){
     		sb.setProgress(0);
-    		if(bmiresult==0)
+    		if(bmiresult==0.0){
     		tv.setText(R.string.bmi_result_name);
     		tvn.setText("0.00");
+    		}else{
+    		tv.setText(R.string.bmi_result_name);
+    		tvn.setText(bmi);
+    		}
+    		
     	}else{
     			tv.setText(R.string.bmi_result_name);	
     			tvn.setText(bmi);
@@ -93,6 +98,9 @@ public class BMICalculatorActivity extends Activity {
      	sb.setProgress(bmiresult-10);
     	tv.setText(R.string.bmi_result_name);
     	tvn.setText(bmi);
+    	if(tvn.getText().toString().equalsIgnoreCase("NaN")){
+    		tvn.setText("0");
+    	}
     	if(bmiresult < 18.5){
     		itv.setText(R.string.bmi_result_2);
     	}else if(bmiresult <= 23.4){
