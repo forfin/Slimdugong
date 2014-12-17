@@ -250,12 +250,18 @@ public class DatabaseManager {
 	
 	public Date getLastCosumeDate() {
 		int total = consume_preference.getInt(KEY_TOTAL);
+		if(total == 0){
+			return new Date(0L);
+		}
 		ArrayList<String> marray = consume_preference.getList((total-1)+"");
 		return new Date(Long.valueOf(marray.get(2)));
 	}
 	
 	public Date getLastExerciseDate() {
 		int total = exercise_preference.getInt(KEY_TOTAL);
+		if(total == 0){
+			return new Date(0L);
+		}
 		ArrayList<String> marray = exercise_preference.getList((total-1)+"");
 		return new Date(Long.valueOf(marray.get(4)));
 	}
