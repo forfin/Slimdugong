@@ -84,7 +84,7 @@ public class BMICalculatorActivity extends Activity {
     		sb.setProgress(0);
     		if(bmiresult==0)
     		tv.setText(R.string.bmi_result_name);
-    		tvn.setText(0.00+"");
+    		tvn.setText("0.00");
     	}else{
     			tv.setText(R.string.bmi_result_name);	
     			tvn.setText(bmi);

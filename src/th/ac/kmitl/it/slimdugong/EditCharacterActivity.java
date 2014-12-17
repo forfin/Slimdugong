@@ -38,8 +38,8 @@ public class EditCharacterActivity extends Activity {
 		user_weight = (EditText) findViewById(R.id.user_weight);
 		
 		mDatabase = SlimDugong.getInstance().getDatabase();
-		user_height.setText(mDatabase.getUserWeight().toString());
-		user_weight.setText(mDatabase.getUserHeight().toString());
+		user_height.setText(mDatabase.getUserHeight().toString());
+		user_weight.setText(mDatabase.getUserWeight().toString());
 		ArrayList<Integer> oldCharacter = mDatabase.getUserCharacter();
 		
 		character_view = (CharacterView) findViewById(R.id.character_view);
