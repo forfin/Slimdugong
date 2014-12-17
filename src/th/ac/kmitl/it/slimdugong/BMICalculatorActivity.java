@@ -53,6 +53,8 @@ public class BMICalculatorActivity extends Activity {
 	    	            	int height = Integer.valueOf(heightinput.getText().toString().trim());
 	    	            	bmi = calBmi(weight,height);
 	    	            	createDialog().show();
+	    	            	final TextView err = (TextView) findViewById(R.id.error_msg);
+    	                    err.setText("");
     	            	}catch(NumberFormatException e){
     	            		final TextView err = (TextView) findViewById(R.id.error_msg);
     	                    err.setText(R.string.bmi_invalid_input_msg);

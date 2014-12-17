@@ -174,8 +174,8 @@ public class EditCharacterActivity extends Activity {
 				
 				
 				try{
-					Integer h = Integer.valueOf(user_height.getText().toString());
-					Integer w = Integer.valueOf(user_weight.getText().toString());
+					Integer h = Integer.valueOf(user_height.getText().toString().trim());
+					Integer w = Integer.valueOf(user_weight.getText().toString().trim());
 					
 					character_view.clearMemoryAll();
 					
