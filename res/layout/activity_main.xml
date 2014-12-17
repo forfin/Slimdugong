@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="th.ac.kmitl.it.slimdugong.MainActivity" >
-
+<!-- th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView -->
     <th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView
         android:id="@+id/character_view"
         android:layout_width="200dp"
@@ -83,9 +83,9 @@
         android:id="@+id/msg_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
         android:layout_below="@+id/name"
         android:layout_marginTop="28dp"
+        android:layout_toRightOf="@+id/character_view"
         android:background="@drawable/msg_box" />
 
     <TextView
@@ -93,8 +93,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/msg_box"
-        android:layout_alignRight="@+id/name"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="69dp"
+        android:layout_marginLeft="220dp"
         android:text="หิวจังเลย" />
 
     <TextView
