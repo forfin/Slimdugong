@@ -110,6 +110,9 @@ public class MainActivity extends ActionBarActivity {
         }else if (id == R.id.action_bmi) {
         	intent = new Intent(this, BMICalculatorActivity.class);
         	startActivity(intent);
+		}else if (id == R.id.action_edit_character) {
+        	intent = new Intent(this, EditCharacterActivity.class);
+        	startActivity(intent);
 		}
         return super.onOptionsItemSelected(item);
     }

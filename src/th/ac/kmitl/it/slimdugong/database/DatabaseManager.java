@@ -22,6 +22,7 @@ import th.ac.kmitl.it.slimdugong.database.entity.FoodType;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
 import th.ac.kmitl.it.slimdugong.database.entity.local.User;
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -171,9 +172,6 @@ public class DatabaseManager {
 		consume_preference.putInt(KEY_TOTAL, total+1);
 		
 		user_preference.putLong(User.KEY_LAST_CONSUME_DATE, consume.getConsumeTime().getTime());
-		user_preference.putInt(User.KEY_TODAY_ENERGY_EAT,
-				user_preference.getInt(User.KEY_TODAY_ENERGY_EAT) +
-				consume.getFoodEnergy());
 		
 	}
 	
@@ -197,6 +195,11 @@ public class DatabaseManager {
 		return res;
 	}
 	
+	public void setUserHeightWeight(int h, int w) {
+		user_preference.putInt(User.KEY_HEIGHT, h);
+		user_preference.putInt(User.KEY_WEIGHT, w);
+	}
+	
 	public void exerciseCommit(Exercise exer) {		
 		int total = exercise_preference.getInt(KEY_TOTAL);
 		ArrayList<String> marray = new ArrayList<String>();		
@@ -209,9 +212,6 @@ public class DatabaseManager {
 		exercise_preference.putInt(KEY_TOTAL, total+1);		
 		
 		user_preference.putLong(User.KEY_LAST_EXERCISE_DATE, exer.getExerTime().getTime());
-		user_preference.putInt(User.KEY_TODAY_ENERGY_BURN,
-				user_preference.getInt(User.KEY_TODAY_ENERGY_BURN) +
-				exer.getEnegyBurn());
 		
 	}
 	
@@ -236,6 +236,14 @@ public class DatabaseManager {
 		return res;
 	}
 	
+	public void setUserName(String name) {
+		user_preference.putString(User.KEY_NAME, name);		
+	}
+	
+	public void setUserCharacter(Integer[] character) {
+		user_preference.putListInt(User.KEY_CHARACTER, character);
+	}
+	
 	public boolean isNoUser() {
 		return user_preference.getString(User.KEY_NAME).equals("");
 	}
@@ -246,6 +254,14 @@ public class DatabaseManager {
 	
 	public String getUserName() {
 		return user_preference.getString(User.KEY_NAME);
+	}
+	
+	public Integer getUserWeight() {
+		return user_preference.getInt(User.KEY_WEIGHT);
+	}
+	
+	public Integer getUserHeight() {
+		return user_preference.getInt(User.KEY_HEIGHT);
 	}
 	
 	public Date getUserLastCosumeDate() {

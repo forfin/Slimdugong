@@ -5,6 +5,7 @@ package th.ac.kmitl.it.slimdugong;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,6 +40,11 @@ public class BMICalculatorActivity extends Activity {
 		confirmButton = (Button) findViewById(R.id.bmi_confirm);
 		weightinput = (EditText) findViewById(R.id.weightinput);
 		heightinput = (EditText) findViewById(R.id.heightinput);
+		
+		DatabaseManager mDatabase = SlimDugong.getInstance().getDatabase();
+		weightinput.setText(mDatabase.getUserWeight().toString());
+		heightinput.setText(mDatabase.getUserHeight().toString());
+		
 		confirmButton.setOnClickListener(new OnClickListener() {
 	    
     	            public void onClick(View arg0) {
@@ -49,13 +55,8 @@ public class BMICalculatorActivity extends Activity {
 	    	            	createDialog().show();
     	            	}catch(NumberFormatException e){
     	            		final TextView err = (TextView) findViewById(R.id.error_msg);
-    	                    err.setText(R.string.error_msg);
+    	                    err.setText(R.string.bmi_invalid_input_msg);
     	            	}
-//    	            	if(weightinput.getText().toString() == "" || heightinput.getText().toString()==""){
-//    	            		
-//    	            	}else{
-//	    	            	
-//    	            	}
     	            }  
     	        });
 	}

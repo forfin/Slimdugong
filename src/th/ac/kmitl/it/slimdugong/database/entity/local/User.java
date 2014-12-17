@@ -10,8 +10,9 @@ public class User {
 	
 	public static final String KEY_LAST_CONSUME_DATE = "consume";
 	public static final String KEY_LAST_EXERCISE_DATE = "exercise";
-	public static final String KEY_TODAY_ENERGY_EAT = "eat";
-	public static final String KEY_TODAY_ENERGY_BURN = "burn";
+	
+	public static final String KEY_HEIGHT = "height";
+	public static final String KEY_WEIGHT = "weight";
 	
 	public static final String SEX_MALE = "male";
 	public static final String SEX_FEMALE = "female";
@@ -20,23 +21,18 @@ public class User {
 	private String sex;
 	private int[] character;
 	private Date lastConsumeDate;
-	private Date lastExerciseDate;
-	private int todayEnergyEat;
-	private int todayEnergyBurn;
+	private Integer height;
+	private Integer weight;
 	
 	
-	public int getTodayEnergyBurn() {
-		return todayEnergyBurn;
-	}
-	public void setTodayEnergyBurn(int todayEnergyBurn) {
-		this.todayEnergyBurn = todayEnergyBurn;
-	}
 	public Date getLastConsumeDate() {
 		return lastConsumeDate;
 	}
 	public void setLastConsumeDate(Date lastConsumeDate) {
 		this.lastConsumeDate = lastConsumeDate;
 	}
+	private Date lastExerciseDate;
+	
 	public Date getLastExerciseDate() {
 		return lastExerciseDate;
 	}
@@ -60,6 +56,18 @@ public class User {
 	}
 	public void setCharacter(int[] character) {
 		this.character = character;
+	}
+	public Integer getHeight() {
+		return height;
+	}
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
+	public Integer getWeight() {
+		return weight;
+	}
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
 	
 }

@@ -17,8 +17,15 @@
         android:id="@+id/action_update"
         android:title="@string/update_action"
       />
+    
 	<item
         android:id="@+id/action_bmi"
         android:title="@string/bmi_action"
         />
+	
+	<item
+        android:id="@+id/action_edit_character"
+        android:title="@string/edit_character_action"
+        />
+	
 </menu>

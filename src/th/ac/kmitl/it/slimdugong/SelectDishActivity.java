@@ -203,7 +203,7 @@ public class SelectDishActivity extends ActionBarActivity {
 		}   	
     }
     
-    public Dialog DishSelectedDialog(final Food food) {
+    private Dialog DishSelectedDialog(final Food food) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(SelectDishActivity.this);            
         builder.setTitle(food.getFoodName())

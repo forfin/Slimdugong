@@ -13,6 +13,7 @@
     <string name="select_dish_scan_barcode">Scan Barcode</string>
     <string name="select_dish_recent">recent</string>
     <string name="select_dish_calories">calories</string>
+    <string name="select_dish_dialog_fat">fat</string>
     <string name="select_dish_dialog_energy">Energy :</string>
     
     <string name="exercise">Exercise</string>
@@ -31,11 +32,14 @@
     
     <string name="create_character">Create Character</string>
     
+    <string name="bmi">BMI Calculator</string>
     <string name="bmi_action">BMI Cal</string>
     <string name="bmi_name">BMI CALCULATOR</string>
-    <string name="weight">Weight : </string>
-    <string name="height">Height : </string>
-    <string name="error_msg">กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</string>
+    <string name="weight">น้ำหนัก :</string>
+    <string name="height">ส่วนสูง :</string>
+    <string name="weight_kg">กก.</string>
+    <string name="height_cm">ซม.</string>
+    <string name="bmi_invalid_input_msg">กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</string>
     <string name ="bmi_result_name">ค่า BMI ของคุณเท่ากับ</string>
     <string name ="bmi_result_1">น้ำหนักคุณน้อยมากๆ คุณแทบจะไม่มีน้ำหนักเลย คุณอาจจะกรอกค่าน้ำหนักหรือส่วนสูงผิด กรุณากรอกใหม่</string>
     <string name ="bmi_result_2">น้ำหนักน้อยเกินไป ซึ่งอาจจะเกิดจากนักกีฬาที่ออกกำลังกายมาก และได้รับสารอาหารไม่เพียงพอ วิธีแก้ไขต้องรับประทานอาหารที่มีคุณภาพ และมีปริมาณพลังงานเพียงพอ และออกกำลังกายอย่างเหมาะสม</string>
@@ -45,4 +49,8 @@
 	<string name ="bmi_result_6">โรคอ้วนขั้นสูงสุด</string>
 	<string name ="bmi_thin_name">ผอม</string>
 	<string name ="bmi_fat_name">อ้วน</string>
+	
+	<string name="edit_character">Edit Character</string>
+	<string name="edit_character_action">Edit Character</string>
+	
 </resources>

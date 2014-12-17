@@ -1,22 +1,19 @@
 package th.ac.kmitl.it.slimdugong;
 
+import java.util.ArrayList;
+
 import th.ac.kmitl.it.slimdugong.custom.view.CharacterView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
-import th.ac.kmitl.it.slimdugong.database.TinyDB;
-import th.ac.kmitl.it.slimdugong.database.entity.local.User;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class CreateCharacterActivity extends Activity {
+public class EditCharacterActivity extends Activity {
 	
 	private CharacterView character_view;
 	
@@ -27,11 +24,23 @@ public class CreateCharacterActivity extends Activity {
 	private int cHairLength;
 	private int cTopLength;
 	private int cBottomLength;
+	
+	private DatabaseManager mDatabase;
+	private EditText user_height;
+	private EditText user_weight;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_character);
+		setContentView(R.layout.activity_edit_character);
+		
+		user_height = (EditText) findViewById(R.id.user_height);
+		user_weight = (EditText) findViewById(R.id.user_weight);
+		
+		mDatabase = SlimDugong.getInstance().getDatabase();
+		user_height.setText(mDatabase.getUserWeight().toString());
+		user_weight.setText(mDatabase.getUserHeight().toString());
+		ArrayList<Integer> oldCharacter = mDatabase.getUserCharacter();
 		
 		character_view = (CharacterView) findViewById(R.id.character_view);
 		
@@ -41,11 +50,7 @@ public class CreateCharacterActivity extends Activity {
 		ImageButton rt_h = (ImageButton) findViewById(R.id.rt_h);
 		ImageButton rt_t = (ImageButton) findViewById(R.id.rt_t);
 		ImageButton rt_b = (ImageButton) findViewById(R.id.rt_b);
-		ImageButton btn_male = (ImageButton) findViewById(R.id.btn_male);
-		ImageButton btn_female = (ImageButton) findViewById(R.id.btn_female);
 		ImageButton btn_confirm = (ImageButton) findViewById(R.id.btn_confirm);
-		setBtnMale(btn_male);
-		setBtnFemale(btn_female);
 		
 		setLtH(lt_h);
 		setLtT(lt_t);
@@ -56,44 +61,13 @@ public class CreateCharacterActivity extends Activity {
 		
 		setBtnConfirm(btn_confirm);
 		
-		cBase = CharacterView.F_BASE;
-		cHairLength = CharacterView.F_HAIR_LIST.length;
-		cTopLength = CharacterView.F_TOP_LIST.length;
-		cBottomLength = CharacterView.F_BOTTOM_LIST.length;
+		cBase = oldCharacter.get(0);
+		cHair = oldCharacter.get(1);
+		cTop = oldCharacter.get(2);
+		cBottom = oldCharacter.get(3);
+		
 		refreshCharacterView();
 		
-	}
-	
-	private void setBtnMale(ImageButton btn_male){
-		btn_male.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				cBase = CharacterView.M_BASE;
-				cHair = 0;
-				cTop = 0;
-				cBottom = 0;
-				cHairLength = CharacterView.M_HAIR_LIST.length;
-				cTopLength = CharacterView.M_TOP_LIST.length;
-				cBottomLength = CharacterView.M_BOTTOM_LIST.length;
-				refreshCharacterView();
-			}
-		});
-	}
-	
-	private void setBtnFemale(ImageButton btn_female){
-		btn_female.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				cBase = CharacterView.F_BASE;
-				cHair = 0;
-				cTop = 0;
-				cBottom = 0;
-				cHairLength = CharacterView.F_HAIR_LIST.length;
-				cTopLength = CharacterView.F_TOP_LIST.length;
-				cBottomLength = CharacterView.F_BOTTOM_LIST.length;
-				refreshCharacterView();
-			}
-		});
 	}
 	
 	private void refreshCharacterView(){
@@ -102,11 +76,19 @@ public class CreateCharacterActivity extends Activity {
 			character_view.idHair = cHair;
 			character_view.idTop = cTop;
 			character_view.idBottom = cBottom;
+			
+			cHairLength = CharacterView.F_HAIR_LIST.length;
+			cTopLength = CharacterView.F_TOP_LIST.length;
+			cBottomLength = CharacterView.F_BOTTOM_LIST.length;
 		}else{
 			character_view.base = CharacterView.M_BASE;
 			character_view.idHair = cHair;
 			character_view.idTop = cTop;
 			character_view.idBottom = cBottom;
+			
+			cHairLength = CharacterView.M_HAIR_LIST.length;
+			cTopLength = CharacterView.M_TOP_LIST.length;
+			cBottomLength = CharacterView.M_BOTTOM_LIST.length;
 		}
 		character_view.invalidate();
 	}
@@ -186,32 +168,31 @@ public class CreateCharacterActivity extends Activity {
 	
 	private void setBtnConfirm(ImageButton btn_confirm){
 			btn_confirm.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				LayoutInflater inflator = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-				View view = inflator.inflate(R.layout.dialog_enter_name, null);
-	        	final EditText input = (EditText)view.findViewById(R.id.dialog_enter_name_name);
-	        	
-	        	new AlertDialog.Builder(CreateCharacterActivity.this)
-	        	.setTitle("Enter your name")
-	        	.setView(view)
-	        	.setPositiveButton(R.string.defualt_ok, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-						DatabaseManager mDatabase = SlimDugong.getInstance().getDatabase();
-						mDatabase.setUserName(input.getText().toString());
-						mDatabase.setUserCharacter(new Integer[]{cBase, cHair, cTop, cBottom});
-						Intent intent = new Intent(CreateCharacterActivity.this, MainActivity.class);
-						character_view.clearMemoryAll();
-			        	startActivity(intent);
-			        	finish();
-					}
-				})
-				.setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						
-					}
-				})
-				.show();
+				
+				
+				try{
+					Integer h = Integer.valueOf(user_height.getText().toString());
+					Integer w = Integer.valueOf(user_weight.getText().toString());
+					
+					character_view.clearMemoryAll();
+					
+					mDatabase.setUserHeightWeight(h, w);
+					mDatabase.setUserCharacter(new Integer[]{cBase, cHair, cTop, cBottom});
+					
+					Intent intent = new Intent(EditCharacterActivity.this, MainActivity.class);
+		        	startActivity(intent);
+		        	finish();
+				}catch(NumberFormatException e){
+					new AlertDialog.Builder(EditCharacterActivity.this)
+						.setIcon(R.drawable.ic_action_alert)
+						.setTitle(R.string.bmi_invalid_input_msg)
+						.show();
+				}
+				
+				
 			}
 		});
 	}
