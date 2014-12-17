@@ -40,12 +40,12 @@ public class CharacterMainView extends CharacterView {
 		bBase = getResizedBitmap(base, height, width);
 		if(base==M_BASE){
 			bHair = getResizedBitmap(M_HAIR_LIST[idHair], height, width);
-			bTop = getResizedBitmap(M_TOP_LIST[idHair], height, width);
-			bButtom = getResizedBitmap(M_BOTTOM_LIST[idHair], height, width);
+			bTop = getResizedBitmap(M_TOP_LIST[idTop], height, width);
+			bButtom = getResizedBitmap(M_BOTTOM_LIST[idBottom], height, width);
 		}else{
 			bHair = getResizedBitmap(F_HAIR_LIST[idHair], height, width);
-			bTop = getResizedBitmap(F_TOP_LIST[idHair], height, width);
-			bButtom = getResizedBitmap(F_BOTTOM_LIST[idHair], height, width);
+			bTop = getResizedBitmap(F_TOP_LIST[idTop], height, width);
+			bButtom = getResizedBitmap(F_BOTTOM_LIST[idBottom], height, width);
 		}
 		
 		canvas.drawBitmap(bBase, 0, 0, mPaint);

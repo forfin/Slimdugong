@@ -17,11 +17,32 @@ public class MainActivity extends ActionBarActivity {
 	
 	private DatabaseManager mDatabaseManager;	
 	
+	TextView status_text;
+	ImageButton status_workout;
+	ImageButton status_eat;
+	TextView consume_num;
+	TextView burn_num;
+	CharacterMainView character_view;
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		showCharacter();
+    	showStatus();
+	}
+	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        status_text = (TextView) findViewById(R.id.status_text);
+    	status_workout = (ImageButton) findViewById(R.id.status_workout);
+    	status_eat = (ImageButton) findViewById(R.id.status_eat);
+    	consume_num = (TextView) findViewById(R.id.consume_num);
+    	burn_num = (TextView) findViewById(R.id.burn_num);
+    	character_view = (CharacterMainView) findViewById(R.id.character_view);
         
         mDatabaseManager = SlimDugong.getInstance().getDatabase();
     	showCharacter();
@@ -30,10 +51,6 @@ public class MainActivity extends ActionBarActivity {
     }
     
     private void showStatus(){
-    	TextView status_text = (TextView) findViewById(R.id.status_text);
-    	ImageButton status_workout = (ImageButton) findViewById(R.id.status_workout);
-    	ImageButton status_eat = (ImageButton) findViewById(R.id.status_eat);
-    	
     	StatusController status = StatusController.getInstance();
     	String statusText = status.getCorrentStatusText();
     	int statusConsum = status.getCurrentConsumeStatus();
@@ -63,18 +80,14 @@ public class MainActivity extends ActionBarActivity {
 			status_workout.setImageResource(R.drawable.status_workout_red);
 			break;
 		}
-    	
-    	TextView consume_num = (TextView) findViewById(R.id.consume_num);
-    	TextView burn_num = (TextView) findViewById(R.id.burn_num);
-    	
+
     	consume_num.setText(status.getTodayEnergyEat() + "");
     	burn_num.setText(status.getTodayEnergyBurn() + "");
     	
     }
     
     private void showCharacter(){
-    	CharacterMainView character_view = (CharacterMainView) findViewById(R.id.character_view);
-    	Log.d("Character mDatabaseManager.getUserCharacter() = ", mDatabaseManager.getUserCharacter().toString());
+    	character_view = (CharacterMainView) findViewById(R.id.character_view);
     	character_view.setCharacter(mDatabaseManager.getUserCharacter());
     	character_view.invalidate();
     	

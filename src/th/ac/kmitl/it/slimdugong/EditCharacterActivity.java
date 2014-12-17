@@ -182,8 +182,6 @@ public class EditCharacterActivity extends Activity {
 					mDatabase.setUserHeightWeight(h, w);
 					mDatabase.setUserCharacter(new Integer[]{cBase, cHair, cTop, cBottom});
 					
-					Intent intent = new Intent(EditCharacterActivity.this, MainActivity.class);
-		        	startActivity(intent);
 		        	finish();
 				}catch(NumberFormatException e){
 					new AlertDialog.Builder(EditCharacterActivity.this)
