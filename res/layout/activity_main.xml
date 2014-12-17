@@ -24,17 +24,6 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/statsname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/character_view"
-        android:layout_below="@+id/character_view"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="36dp"
-        android:text="สถิติรายวัน"
-        android:textSize="20dp" />
-
-    <TextView
         android:id="@+id/consume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,15 +33,6 @@
         android:text="บริโภค :" />
 
     <TextView
-        android:id="@+id/burn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/consume"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="14dp"
-        android:text="เผาผลาญ :" />
-
-    <TextView
         android:id="@+id/burn_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,24 +40,6 @@
         android:layout_alignBottom="@+id/burn"
         android:layout_toLeftOf="@+id/status_workout"
         android:text="3434534" />
-
-    <ImageButton
-        android:id="@+id/status_workout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/character_view"
-        android:layout_toLeftOf="@+id/status_eat"
-        android:background="@android:color/transparent"
-        android:src="@drawable/status_workout_green" />
-
-    <ImageButton
-        android:id="@+id/status_eat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/name"
-        android:layout_alignTop="@+id/status_workout"
-        android:background="@android:color/transparent"
-        android:src="@drawable/status_eat_gray" />
 
     <TextView
         android:id="@+id/msg_box"
@@ -105,5 +67,52 @@
         android:layout_alignBottom="@+id/consume"
         android:layout_alignLeft="@+id/burn_num"
         android:text="324324" />
+
+    <TextView
+        android:id="@+id/burn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/consume"
+        android:layout_below="@+id/consume"
+        android:layout_marginTop="15dp"
+        android:text="เผาผลาญ :" />
+
+    <ImageButton
+        android:id="@+id/status_workout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg_box"
+        android:layout_toRightOf="@+id/character_view"
+        android:background="@android:color/transparent"
+        android:src="@drawable/status_workout_green" />
+
+    <ImageButton
+        android:id="@+id/bth_share_facebook"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/statsname"
+        android:layout_alignLeft="@+id/consume_num"
+        android:layout_alignRight="@+id/msg_box"
+        android:background="@drawable/btn_share" />
+
+    <TextView
+        android:id="@+id/statsname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/character_view"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="26dp"
+        android:layout_toLeftOf="@+id/imageButton1"
+        android:text="สถิติรายวัน"
+        android:textSize="20dp" />
+
+    <ImageButton
+        android:id="@+id/status_eat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/msg_box"
+        android:layout_alignTop="@+id/status_workout"
+        android:background="@android:color/transparent"
+        android:src="@drawable/status_eat_gray" />
 
 </RelativeLayout>

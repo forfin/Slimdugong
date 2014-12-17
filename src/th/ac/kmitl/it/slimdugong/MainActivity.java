@@ -4,6 +4,7 @@ package th.ac.kmitl.it.slimdugong;
 import com.facebook.AppEventsLogger;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
+import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
 
 import th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -27,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
 	TextView consume_num;
 	TextView burn_num;
 	CharacterMainView character_view;
+	ImageButton share_facebook;
 	
 	private UiLifecycleHelper uiHelper;
 	
@@ -77,11 +81,22 @@ public class MainActivity extends ActionBarActivity {
     	showCharacter();
     	showStatus();
     	
-        FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
-        .setLink("https://developers.facebook.com/android")
-        .build();
-		uiHelper.trackPendingDialogCall(shareDialog.present());
+    	 final ShareDialogBuilder shareDialog = new FacebookDialog.ShareDialogBuilder(this);
+    	
+    	share_facebook = (ImageButton) findViewById(R.id.bth_share_facebook);
+    	share_facebook.setOnClickListener(new OnClickListener() {
+	    
+    	            public void onClick(View arg0) {
+    	            	FacebookDialog facebookDialog = shareDialog.setLink("https://developers.facebook.com/android")
+    	                .build();
+    	        		uiHelper.trackPendingDialogCall(facebookDialog.present());
+    	            }
+
         
+    	});
+    	
+    	
+    	
     }
     
     @Override
