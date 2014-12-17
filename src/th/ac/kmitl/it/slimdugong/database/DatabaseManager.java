@@ -10,6 +10,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -30,6 +32,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.text.format.DateUtils;
+import android.util.Log;
 
 public class DatabaseManager {
 	
@@ -189,6 +193,38 @@ public class DatabaseManager {
 		return res;
 	}
 	
+	public ArrayList<Consume> getTodayConsume(){		
+		ArrayList<Consume> res = new ArrayList<Consume>();
+		int total = consume_preference.getInt(KEY_TOTAL);
+		for(int i=total-1;i>=0;i--){
+			Consume consume = new Consume();
+			ArrayList<String> marray = consume_preference.getList(i+"");
+			if(!DateUtils.isToday(Long.valueOf(marray.get(2)))){
+				return res;
+			}
+			consume.setConsumeId(Integer.valueOf(marray.get(0)));
+			consume.setFoodId(Integer.valueOf(marray.get(1)));
+			consume.setConsumeTime(new Date(Long.valueOf(marray.get(2))));			
+			consume.setFoodEnergy(Integer.valueOf(marray.get(3)));	
+			consume.setFoodName(marray.get(4));
+			res.add(consume);
+		}
+		return res;
+	}
+	
+	
+	
+	public void deleteConsumes(Set<Object> consumes_delete){
+		ArrayList<Consume> consumes_rewrite = getAllConsume();
+		for (Object consume : consumes_delete) {
+			consumes_rewrite.remove(consume);
+		}
+		consume_preference.putInt(KEY_TOTAL, 0);
+		for (Consume consume : consumes_rewrite) {
+			consumeCommit(consume);
+		}
+	}
+	
 	public void setUserHeightWeight(int h, int w) {
 		user_preference.putInt(User.KEY_HEIGHT, h);
 		user_preference.putInt(User.KEY_WEIGHT, w);
@@ -222,6 +258,37 @@ public class DatabaseManager {
 			res.add(exer);				
 		}
 		return res;
+	}
+	
+	public ArrayList<Exercise> getTodayExercise(){		
+		ArrayList<Exercise> res = new ArrayList<Exercise>();
+		int total = exercise_preference.getInt(KEY_TOTAL);
+		for(int i=total-1;i>=0;i--){
+			Exercise exer = new Exercise();
+			ArrayList<String> marray = exercise_preference.getList(i+"");
+			if(!DateUtils.isToday(Long.valueOf(marray.get(4)))){
+				return res;
+			}
+			exer.setExerId(Integer.valueOf(marray.get(0)));
+			exer.setAthId(Integer.valueOf(marray.get(1)));
+			exer.setEnegyBurn(Integer.valueOf(marray.get(2)));
+			exer.setExerDuration(Integer.valueOf(marray.get(3)));
+			exer.setExerTime(new Date(Long.valueOf(marray.get(4))));
+			exer.setAthName(marray.get(5));
+			res.add(exer);				
+		}
+		return res;
+	}
+	
+	public void deleteExercises(Set<Object> exercises_delete){
+		ArrayList<Exercise> exercises_rewrite = getAllExercise();
+		for (Object exercise : exercises_delete) {
+			exercises_rewrite.remove(exercise);
+		}
+		exercise_preference.putInt(KEY_TOTAL, 0);
+		for (Exercise exercise : exercises_rewrite) {
+			exerciseCommit(exercise);
+		}
 	}
 	
 	public void setUserName(String name) {

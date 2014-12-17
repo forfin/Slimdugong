@@ -1,10 +1,6 @@
 package th.ac.kmitl.it.slimdugong;
 
 
-import com.facebook.AppEventsLogger;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
@@ -13,8 +9,6 @@ import th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -131,11 +125,11 @@ public class MainActivity extends ActionBarActivity {
     
     private void showStatus(){
     	StatusController status = StatusController.getInstance();
-    	String statusText = status.getCorrentStatusText();
+    	Integer statusId = status.getCorrentStatusIdString();
     	int statusConsum = status.getCurrentConsumeStatus();
     	int statusExercise = status.getCurrentExerciseStatus();
     	
-    	status_text.setText(statusText);
+    	status_text.setText(statusId);
     	
     	switch (statusConsum) {
 		case 0:
@@ -179,7 +173,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
     
     @Override
@@ -205,8 +199,8 @@ public class MainActivity extends ActionBarActivity {
 		}else if (id == R.id.action_edit_character) {
         	intent = new Intent(this, EditCharacterActivity.class);
         	startActivity(intent);
-		}else if (id == R.id.action_delete_action) {
-        	intent = new Intent(this, DeleteActionActivity.class);
+		}else if (id == R.id.action_review_today) {
+        	intent = new Intent(this, ReviewTodayActivity.class);
         	startActivity(intent);
 		}
         return super.onOptionsItemSelected(item);

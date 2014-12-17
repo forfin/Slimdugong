@@ -11,6 +11,8 @@ public class Exercise {
 	private Date exerTime;
 	private String AthName;
 	
+	public Boolean isCheck = false;
+	
 	public Integer getExerId() {
 		return exerId;
 	}

@@ -18,7 +18,9 @@
         <activity
             android:name=".StartActivity"
             android:label="@string/app_name" 
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,7 +28,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SelectDishActivity"
@@ -51,7 +55,9 @@
         <activity
             android:name=".BMICalculatorActivity"
             android:label="@string/bmi"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -59,14 +65,16 @@
         <activity
             android:name=".EditCharacterActivity"
             android:label="@string/edit_character"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".DeleteActionActivity"
-            android:label="@string/delete_action"
+            android:name=".ReviewTodayActivity"
+            android:label="@string/review_today"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -74,7 +82,9 @@
         </activity>
         <activity
             android:name=".CreateCharacterActivity"
-            android:label="@string/create_character" >
+            android:label="@string/create_character"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait" >
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>

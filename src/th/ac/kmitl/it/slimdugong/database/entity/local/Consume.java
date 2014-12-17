@@ -10,6 +10,8 @@ public class Consume {
 	private Integer foodEnergy;
 	private String foodName;
 	
+	public Boolean isCheck = false;
+	
 	public Date getConsumeTime() {
 		return consumeTime;
 	}

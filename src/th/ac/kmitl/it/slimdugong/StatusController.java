@@ -1,13 +1,10 @@
 package th.ac.kmitl.it.slimdugong;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
-import android.R.string;
-import android.text.format.DateUtils;
 
 public class StatusController {
 	
@@ -24,22 +21,18 @@ public class StatusController {
 	
 	public int getTodayEnergyEat() {
 		int todayEnergyEat = 0;
-		ArrayList<Consume> consumes = SlimDugong.getInstance().getDatabase().getAllConsume();
+		ArrayList<Consume> consumes = SlimDugong.getInstance().getDatabase().getTodayConsume();
 		for (Consume consume : consumes) {
-			if(DateUtils.isToday(consume.getConsumeTime().getTime())){
-				todayEnergyEat += consume.getFoodEnergy();
-			}
+			todayEnergyEat += consume.getFoodEnergy();
 		}
 		return todayEnergyEat;
 	}
 	
 	public int getTodayEnergyBurn() {
 		int todayEnergyBurn = 0;
-		ArrayList<Exercise> exercises = SlimDugong.getInstance().getDatabase().getAllExercise();
+		ArrayList<Exercise> exercises = SlimDugong.getInstance().getDatabase().getTodayExercise();
 		for (Exercise exercise : exercises) {
-			if(DateUtils.isToday(exercise.getExerTime().getTime())){
-				todayEnergyBurn += exercise.getEnegyBurn();
-			}
+			todayEnergyBurn += exercise.getEnegyBurn();
 		}
 		return todayEnergyBurn;
 	}
@@ -97,26 +90,26 @@ public class StatusController {
 		}
 	}
 	
-	public String getCorrentStatusText(){
+	public Integer getCorrentStatusIdString(){
 		if(lastConsumeDate.after(lastExerciseDate)){
 			int hungry = getCurrentConsumeStatus();
 			switch (hungry) {
 			case 0:
-				return "Full";
+				return R.string.status_consume_full;
 			case 1:
-				return "Normal";
+				return R.string.status_nothing_to_say;
 			case 2:
-				return "Hungry";
+				return R.string.status_consume_hungry;
 			}
 		}else{
 			int Strong = getCurrentExerciseStatus();
 			switch (Strong) {
 			case 0:
-				return "Strong";
+				return R.string.status_exercise_strong;
 			case 1:
-				return "Normal";
+				return R.string.status_nothing_to_say;
 			case 2:
-				return "Weak";
+				return R.string.status_exercise_weak;
 			}
 		}
 		return null;

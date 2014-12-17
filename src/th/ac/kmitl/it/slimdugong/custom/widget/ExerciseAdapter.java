@@ -34,6 +34,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
 	    	convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_checkbox, parent, false);
 	    }
 	    // Lookup view for data population
+	    CheckBox chkbox = (CheckBox) convertView.findViewById(R.id.chkbox);
 	    TextView chk_title = (TextView) convertView.findViewById(R.id.chk_title);
 	    TextView chk_descripe = (TextView) convertView.findViewById(R.id.chk_descripe);
 	    TextView chk_descripe2 = (TextView) convertView.findViewById(R.id.chk_descripe2);
@@ -61,6 +62,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
 	    	chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getExerTime()));	    
 	    }
 	    
+	    chkbox.setChecked(user.isCheck);
 	    // Return the completed view to render on screen
 	    return convertView;
 	}

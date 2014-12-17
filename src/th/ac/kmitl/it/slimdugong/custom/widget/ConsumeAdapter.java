@@ -60,6 +60,8 @@ public class ConsumeAdapter extends ArrayAdapter<Consume>{
 	    	chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getConsumeTime()));	    
 	    }
 	    // Return the completed view to render on screen
+	    
+	    chkbox.setChecked(user.isCheck);
 	    return convertView;
 	}
 }

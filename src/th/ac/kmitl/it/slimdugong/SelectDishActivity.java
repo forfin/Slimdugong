@@ -67,13 +67,11 @@ public class SelectDishActivity extends ActionBarActivity {
     	}    	
         
         for(FoodType ft:ftlist){
-        	if(ft.getFoodTypeId()!=0){
-        		Tab tab = actionBar.newTab()
-            			.setTag(ft.getFoodTypeId())
-                        .setText(ft.getFoodTypeName())
-                        .setTabListener(new mTab());
-            	actionBar.addTab(tab);
-        	}        	
+    		Tab tab = actionBar.newTab()
+        			.setTag(ft.getFoodTypeId())
+                    .setText(ft.getFoodTypeName())
+                    .setTabListener(new mTab());
+        	actionBar.addTab(tab);
         }       
 
     }
@@ -224,7 +222,7 @@ public class SelectDishActivity extends ActionBarActivity {
                 	   c.setFoodName(food.getFoodName());
                 	   mDatabaseManager.consumeCommit(c);
                 	   
-                	   Toast.makeText(SelectDishActivity.this, food.getFoodName() + " "
+                	   Toast.makeText(SelectDishActivity.this, food.getFoodName() + "\n"
                 			   + food.getFoodCal() + " " + getText(R.string.select_dish_calories), 
                 			   Toast.LENGTH_SHORT).show();
                 	   

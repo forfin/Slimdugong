@@ -199,8 +199,8 @@ public class ExerciseActivity extends ActionBarActivity {
                     	   mDatabaseManager.exerciseCommit(c);
                     	   
                     	   Toast.makeText(ExerciseActivity.this, ath.getAthName() + " "
-                    			   + c.getExerDuration() + getText(R.string.default_miniutes) + " "
-                    			   + c.getEnegyBurn() + getText(R.string.select_dish_calories), 
+                    			   + c.getExerDuration() + " " + getText(R.string.default_miniutes) + "\n"
+                    			   + c.getEnegyBurn() + " " + getText(R.string.select_dish_calories), 
                     			   Toast.LENGTH_SHORT).show();
                     	   
                        }

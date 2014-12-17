@@ -5,43 +5,46 @@
     <string name="facebook_app_id">1456855687868401</string>
     <string name="facebook_shared_message">วันนี้เราทานไป %1$s แครอรี่ ออกกำลังกายไป %2$s แครอรี่ มาดูแลสุขภาพด้วยกันเถอะ</string>
     
-    <string name="defualt_ok">OK</string>    
-    <string name="defualt_cancel">Cancel</string>
+    <string name="defualt_ok">ตกลง</string>    
+    <string name="defualt_cancel">ยกเลิก</string>
     <string name="defualt_title_error">An error occurred</string>
-    <string name="default_close">Close</string>
-    <string name="default_delete">Delete</string>
+    <string name="default_close">ปิด</string>
+    <string name="default_confirm">ยืนยัน</string>
+    <string name="default_delete_selected">ลบที่เลือก</string>
     
+    <string name="delete_multiple_confirm">ยืนยันที่จะลบ %1$s รายการ</string>
+    <string name="delete_select_at_least_1">กรุณาเลือกอย่างน้อย 1 รายการ</string>
     
-    <string name="select_dish">Select Dish</string>
-    <string name="select_dish_action">Select Dish</string>
-    <string name="select_dish_scan_barcode">Scan Barcode</string>
-    <string name="select_dish_recent">recent</string>
-    <string name="select_dish_calories">calories</string>
-    <string name="select_dish_dialog_fat">fat</string>
-    <string name="select_dish_dialog_energy">Energy :</string>
+    <string name="select_dish">เลือกรายการอาหาร</string>
+    <string name="select_dish_action">ทานอาหาร/แสกนบาร์โค้ด</string>
+    <string name="select_dish_scan_barcode">แสกนบาร์โค้ด</string>
+    <string name="select_dish_recent">ล่าสุด</string>
+    <string name="select_dish_calories">แคลรอรี่</string>
+    <string name="select_dish_dialog_fat">ไขมัน</string>
+    <string name="select_dish_dialog_energy">พลังงาน :</string>
     
-    <string name="exercise">Exercise</string>
-    <string name="exercise_action">Exercise</string>
-    <string name="exercise_recent_tab">recent</string>
-    <string name="exercise_tab">Exercise</string>
-    <string name="consume_tab">Consume</string>
+    <string name="exercise">เลือกรายการออกกำลังกาย</string>
+    <string name="exercise_action">ออกกำลังกาย</string>
+    <string name="exercise_recent_tab">ล่าสุด</string>
+    <string name="exercise_tab">ออกกำลังกาย</string>
+    <string name="consume_tab">บริโภค</string>
     <string name="exercise_bph">BPH</string>
-    <string name="default_hours">hour(s)</string>
-    <string name="default_miniutes">minute(s)</string>
-    <string name="default_seconds">second(s)</string>
-    <string name="default_ago">ago</string>
+    <string name="default_hours">ชั่วโมง</string>
+    <string name="default_miniutes">นาที</string>
+    <string name="default_seconds">วินาที</string>
+    <string name="default_ago">ที่แล้ว</string>
     
-    <string name="update_action">Update</string>
-    <string name="update_on_checking">Checking for update&#8230;</string>
-    <string name="update_on_downloading">Downloading new update&#8230;</string>
-    <string name="update_success">Update successfully</string>
-    <string name="update_already_latest">Already have a latest database version</string>
+    <string name="update_action">อัพเดตฐานข้อมูล</string>
+    <string name="update_on_checking">กำลังตรวจหาเวอร์ชันใหม่&#8230;</string>
+    <string name="update_on_downloading">กำลังดาวน์โหลด&#8230;</string>
+    <string name="update_success">อัพเดตฐานข้อมูลสำเร็จ</string>
+    <string name="update_already_latest">ฐานข้อมูลเป็นเวอร์ชันล่าสุดแล้ว</string>
     
-    <string name="create_character">Create Character</string>
+    <string name="create_character">สร้างตัวละคร</string>
     
-    <string name="bmi">BMI Calculator</string>
-    <string name="bmi_action">BMI Cal</string>
-    <string name="bmi_name">BMI CALCULATOR</string>
+    <string name="bmi">โปรแกรมคำนวณ BMI</string>
+    <string name="bmi_action">โปรแกรมคำนวณ BMI</string>
+    <string name="bmi_name">คำนวณ BMI</string>
     <string name="weight">น้ำหนัก :</string>
     <string name="height">ส่วนสูง :</string>
     <string name="weight_kg">กก.</string>
@@ -57,10 +60,16 @@
 	<string name ="bmi_thin_name">ผอม</string>
 	<string name ="bmi_fat_name">อ้วน</string>
 	
-	<string name="edit_character">Edit Character</string>
-	<string name="edit_character_action">Edit Character</string>
+	<string name="edit_character">แก้ไขข้อมูลตัวละคร</string>
+	<string name="edit_character_action">แก้ไขข้อมูลตัวละคร</string>
 	
-	<string name="delete_action">Delete Action</string>
-	<string name="delete_action_action">Delete Action</string>
+	<string name="review_today">จัดการรายการวันนี้</string>
+	<string name="review_today_action">ดูรายการวันนี้</string>
+	
+	<string name="status_consume_full">อิ่มจัง กินมากไม่ดีนะ</string>
+	<string name="status_consume_hungry">หิวจัง หาไรกินหน่อย</string>
+	<string name="status_exercise_strong">แข็งแรงดีจัง</string>
+	<string name="status_exercise_weak">ออกกำลังบ้างนะ</string>
+	<string name="status_nothing_to_say"></string>
 	
 </resources>
