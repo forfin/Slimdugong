@@ -2,6 +2,9 @@ package th.ac.kmitl.it.slimdugong;
 
 
 import com.facebook.AppEventsLogger;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.FacebookDialog.ShareDialogBuilder;
@@ -10,6 +13,8 @@ import th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView;
 import th.ac.kmitl.it.slimdugong.database.DatabaseManager;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,13 +29,14 @@ public class MainActivity extends ActionBarActivity {
 	
 	private DatabaseManager mDatabaseManager;	
 	
-	TextView status_text;
-	ImageButton status_workout;
-	ImageButton status_eat;
-	TextView consume_num;
-	TextView burn_num;
-	CharacterMainView character_view;
-	ImageButton share_facebook;
+	private TextView status_text;
+	private ImageButton status_workout;
+	private ImageButton status_eat;
+	private TextView consume_num;
+	private TextView burn_num;
+	private CharacterMainView character_view;
+	private ImageButton share_facebook;
+	private String fbPhotoAddress;
 	
 	private UiLifecycleHelper uiHelper;
 	
@@ -81,22 +87,64 @@ public class MainActivity extends ActionBarActivity {
     	showCharacter();
     	showStatus();
     	
-    	 final ShareDialogBuilder shareDialog = new FacebookDialog.ShareDialogBuilder(this);
+    	setFacebookShareButton();
     	
-    	share_facebook = (ImageButton) findViewById(R.id.bth_share_facebook);
-    	share_facebook.setOnClickListener(new OnClickListener() {
-	    
-    	            public void onClick(View arg0) {
-    	            	FacebookDialog facebookDialog = shareDialog.setLink("https://developers.facebook.com/android")
-    	                .build();
-    	        		uiHelper.trackPendingDialogCall(facebookDialog.present());
-    	            }
+    }
+    
+    private void setFacebookShareButton(){
+    	 final ShareDialogBuilder builder = new FacebookDialog.ShareDialogBuilder(this)
+			.setName(getText(R.string.app_name).toString())
+			.setLink("https://play.google.com/store");
 
-        
-    	});
-    	
-    	
-    	
+		share_facebook = (ImageButton) findViewById(R.id.bth_share_facebook);
+		share_facebook.setOnClickListener(new OnClickListener() {
+		
+		        public void onClick(View arg0) {
+		        	uploadImgView(character_view);
+		        	FacebookDialog shareDialog = builder.setPicture(fbPhotoAddress)
+		        		.build();
+		    		uiHelper.trackPendingDialogCall(shareDialog.present());
+		        }
+		});
+    }
+    
+    Request.Callback uploadPhotoRequestCallback = new Request.Callback() {
+        @Override
+        public void onCompleted(Response response) {
+            if (response.getError() != null) { 
+                //post error
+            } else{
+                 String idRploadResponse = (String) response.getGraphObject().getProperty("id");
+                 if (idRploadResponse!= null) { 
+
+                    fbPhotoAddress = "https://www.facebook.com/photo.php?fbid=" +idRploadResponse;                             
+                 } else { 
+                       //error
+                 } 
+
+            }
+        }
+    };
+    
+    public static Bitmap loadBitmapFromView(View v) {
+        Bitmap b = Bitmap.createBitmap( v.getLayoutParams().width, v.getLayoutParams().height, Bitmap.Config.ARGB_8888);                
+        Canvas c = new Canvas(b);
+        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+        v.draw(c);
+        return b;
+    }
+    
+    private void uploadImgView(View v) {
+        Bitmap img = loadBitmapFromView(v);
+
+        if (img != null) {
+            Request request = Request.newUploadPhotoRequest(Session.getActiveSession(), img,  uploadPhotoRequestCallback);
+//            Bundle parameters = request.getParameters(); // <-- THIS IS IMPORTANT
+////            parameters.putString("message", "My message");
+//            // add more params here
+//            request.setParameters(parameters);
+            request.executeAndWait();
+        }
     }
     
     @Override
