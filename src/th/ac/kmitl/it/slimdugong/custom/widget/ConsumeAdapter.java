@@ -6,6 +6,7 @@ import th.ac.kmitl.it.slimdugong.R;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,12 @@ public class ConsumeAdapter extends ArrayAdapter<Consume>{
 	    CheckBox chkbox = (CheckBox) convertView.findViewById(R.id.chkbox);
 	    TextView chk_title = (TextView) convertView.findViewById(R.id.chk_title);
 	    TextView chk_descripe = (TextView) convertView.findViewById(R.id.chk_descripe);
+	    TextView chk_descripe2 = (TextView) convertView.findViewById(R.id.chk_descripe2);
 	    // Populate the data into the template view using the data object
 	    chk_title.setText(user.getFoodName());
 	    chk_descripe.setText(R.string.select_dish_calories);
 	    chk_descripe.setText(user.getFoodEnergy().toString()+" "+chk_descripe.getText());
+	    chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getConsumeTime()));
 	    // Return the completed view to render on screen
 	    return convertView;
 	}

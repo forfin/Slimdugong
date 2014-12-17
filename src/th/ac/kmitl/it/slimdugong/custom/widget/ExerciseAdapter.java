@@ -7,6 +7,8 @@ import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
 import android.content.Context;
+import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +32,14 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
 	    	convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_checkbox, parent, false);
 	    }
 	    // Lookup view for data population
-	    CheckBox chkbox = (CheckBox) convertView.findViewById(R.id.chkbox);
 	    TextView chk_title = (TextView) convertView.findViewById(R.id.chk_title);
 	    TextView chk_descripe = (TextView) convertView.findViewById(R.id.chk_descripe);
+	    TextView chk_descripe2 = (TextView) convertView.findViewById(R.id.chk_descripe2);
 	    // Populate the data into the template view using the data object
 	    chk_title.setText(user.getAthName());
 	    chk_descripe.setText(R.string.select_dish_calories);
 	    chk_descripe.setText(user.getEnegyBurn().toString()+" "+chk_descripe.getText());
+	    chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getExerTime()));	    
 	    // Return the completed view to render on screen
 	    return convertView;
 	}
