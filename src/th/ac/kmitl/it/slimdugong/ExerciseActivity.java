@@ -30,6 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExerciseActivity extends ActionBarActivity {
 	
@@ -195,6 +196,11 @@ public class ExerciseActivity extends ActionBarActivity {
                     	   c.setExerTime(new Date());
                     	   c.setExerDuration(time.intValue());
                     	   mDatabaseManager.exerciseCommit(c);
+                    	   
+                    	   Toast.makeText(ExerciseActivity.this, ath.getAthName() + " "
+                    			   + c.getExerDuration() + getText(R.string.exercise_miniutes) + " "
+                    			   + c.getEnegyBurn() + getText(R.string.select_dish_calories), 
+                    			   Toast.LENGTH_SHORT).show();
                     	   
                        }
                    })

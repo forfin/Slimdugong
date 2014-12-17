@@ -3,26 +3,134 @@ CREATE TABLE `food_type` (
   `ft_id` INTEGER PRIMARY KEY,
   `ft_name` varchar(40) NOT NULL
 );
+INSERT INTO `food_type` VALUES ('0','barcode');
 INSERT INTO `food_type` VALUES ('1','ข้าว');
-CREATE TABLE `food` (
-  `food_id` INTEGER PRIMARY KEY,
-  `food_name` varchar(40) NOT NULL,
-  `food_cal` int(11) NOT NULL,
-  `food_type_id` int(11) NOT NULL,
-  FOREIGN KEY(`food_type_id`) REFERENCES `food_type`(`ft_id`)
+INSERT INTO `food_type` VALUES ('2','อาหารจำพวกเส้น
+');
+INSERT INTO `food_type` VALUES ('3','ของทอด');
+INSERT INTO `food_type` VALUES ('4','แกง');
+INSERT INTO `food_type` VALUES ('5','ปิ้ง,ย่าง');
+INSERT INTO `food_type` VALUES ('6','ไข่');
+INSERT INTO `food_type` VALUES ('7','อื่นๆ');
+CREATE TABLE "food" (
+	`food_id`	INTEGER,
+	`food_name`	TEXT NOT NULL,
+	`food_cal`	int(11) NOT NULL,
+	`food_type_id`	int(11) NOT NULL,
+	`food_fat`	INTEGER,
+	`food_sugar`	INTEGER,
+	`food_sodium`	INTEGER,
+	PRIMARY KEY(food_id)
 );
-INSERT INTO `food` VALUES ('1','ข้าวมันไก่ต้ม','300','1');
-INSERT INTO `food` VALUES ('2','ข้าวมันไก่ทอด','330','1');
-CREATE TABLE `barcode` (
-  `bar_id` INTEGER PRIMARY KEY,
-  `bar_code` varchar(100) NOT NULL,
-  `food_id` int(11) NOT NULL,
-  FOREIGN KEY(`food_id`) REFERENCES `food`(`food_id`)
+INSERT INTO `food` VALUES ('1','คอหมูย่าง','200','5',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('2','ไข่ลูกเขย 1 ฟอง','205','6',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('3','นมยูเอชที่ รสจืด ตราโฟรโมสต์','70','0','8','12','120');
+INSERT INTO `food` VALUES ('4','ถั่วลิสงกรอบ ตราโก๋แก่','160','0','10','3','115');
+INSERT INTO `food` VALUES ('5','โคลลอน รสช็อกโกแลต (บิสกิต โรล) ตรากูลิโกะ','140','0','6','11','5');
+INSERT INTO `food` VALUES ('6','ปลาซาร์ดีนในซอสมะเขือเทศ ตราซีเล็ค','100','0','4.5','2','432');
+INSERT INTO `food` VALUES ('7','ป๊อกกี้ ดับเบิ้ลช็อกโก (บิสกิตแท่งรสช็อกโกแลตเคลือบรสช็อกโกแลต) ตรากูลิโกะ','230','0','9','15','75');
+INSERT INTO `food` VALUES ('8','ป๊อกกี้ รสช็อกโกแลต (บิสกิตแท่งเคลือบรสช็อกโกแลต) ตรากูลิโกะ','220','0','8','18','85');
+INSERT INTO `food` VALUES ('9','ป๊อกกี้ รสสตรอเบอร์รี (บิสกิตแท่งเคลือบรสสตรอเบอร์รี) ตรากูลิโกะ','220','0','8','16','95');
+INSERT INTO `food` VALUES ('10','ป๊อกกี้ รสมัทฉะชาเขียว (บิสกิตแท่งเคลือบรสชาเขียว) ตรา กูลิโกะ','190','0','8','13','90');
+INSERT INTO `food` VALUES ('11','โคอะลามาร์ชช็อกโกแลตขนมปังกรอบสอดไส้ช็อกโกแลต','180','0','8','16','80');
+INSERT INTO `food` VALUES ('12','ปลาสวรรค์ตราทาโร รสบาร์บีคิว','100','0','0','11','830');
+INSERT INTO `food` VALUES ('13','บะหมี่กึ่งสำเร็จรูปรสต้มยำกุ้งน้ำข้น','250','0','11','3','1730');
+INSERT INTO `food` VALUES ('14','บะหมี่สำเร็จรูปรสต้มยำกุ้งน้ำข้น บิ๊กแพค 90 กรัม','440','0','18','4','2080');
+INSERT INTO `food` VALUES ('15','บะหมี่กึ่งสำเร็จรูปต้มยำรสกุ้งตรามาม่า','250','0','11','3','1480');
+INSERT INTO `food` VALUES ('16','น้ำชาเขียวจากใบชาออร์แกนิค รสน้ำผึ้งผสมมะนาว ตรา อิชิตัน กรีนที','220','0','0','49','45');
+INSERT INTO `food` VALUES ('17','เครื่องดื่มกลิ่นโคล่า เอสโคล่า','140','0','0','34','35');
+INSERT INTO `food` VALUES ('18','เครื่องดื่มเป๊ปซี่','100','0','0','25','5');
+INSERT INTO `food` VALUES ('19','โคคา-โคลา (โค้ก)','140','0','0','31','20');
+INSERT INTO `food` VALUES ('20','น้ำนมถั่วเหลือง ยูเอชที แลคตาซอย','260','0','11','28','160');
+INSERT INTO `food` VALUES ('21','มันฝรั่งแท้ทอดกรอบแผ่นเรียบ รสโนริสาหร่าย เลย์','160','0','9','0.5','140');
+INSERT INTO `food` VALUES ('22','มันฝรั่งแท้ทอดกรอบแผ่นเรียบ รสมันฝรั่งแท้ เลย์','150','0','8','0','110');
+INSERT INTO `food` VALUES ('23','ขนมเยลลี่เจลาตินรสผลไม้ ตรา จอลลี่แบร์','70','0','0','10','10');
+INSERT INTO `food` VALUES ('24','วุ้นเจลาตินสำเร็จรูปกลิ่นโคล่า (ตรา จอลลี่โคล่า)','90','0','0','13','25');
+INSERT INTO `food` VALUES ('25','เมล็ดฟักทองอบ ตรา ฟลาวเวอร์ฟูด','160','0','12','0','115');
+INSERT INTO `food` VALUES ('26','ผัดไทย','800','2',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('27','ผัดซีอิ้ว','400','2',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('28','หอยทอด','650','3',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('29','แกงจืดผักกาดขาว','110','4',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('30','แกงกระหรี่ไก่','365','4',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('31','ข้าวต้มทรงเครื่อง','230','3',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('32','ข้าวสวย 1 จาน','350','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('33','ก๊วยจั๊บ','400','2',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('34','ข้าวผัดหมู','660','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('35','ข้าวหมกไก่','685','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('36','ราดหน้า','397','2',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('37','แกงเขียวหวาน','483','4',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('38','พิซซ่า 1/8 อัน','290','7',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('39','เค้กกล้วยหอม','203','7',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('40','ปาท่องโก๋ 1 ตัว','88','3',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('41','ปอเปี๊ยะทอด 1 ชิ้น','82','3',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('42','ทอดมันปลา 3 ชิ้น','111','3',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('43','ข้าวหมูแดง','541','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('44','ข้าวขาหมู','436','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('45','ข้าวผัดกระเพราไก่','554','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('46','ขนมจีนน้ำยา','332','2',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('47','ข้าวผัดกระเพราหมู','580','1',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('48','แกงส้ม','110','4',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('49','ซาลาเปาไส้หมู','202','7',NULL,NULL,NULL);
+INSERT INTO `food` VALUES ('50','ขนมจีบ 1 ชิ้น','32','7',NULL,NULL,NULL);
+CREATE TABLE "barcode" (
+	`bar_id`	INTEGER,
+	`bar_code`	varchar(100) NOT NULL UNIQUE,
+	`food_id`	int(11) NOT NULL,
+	PRIMARY KEY(bar_id)
 );
+INSERT INTO `barcode` VALUES ('1','8850188250108','3');
+INSERT INTO `barcode` VALUES ('2','8852023664224','4');
+INSERT INTO `barcode` VALUES ('3','8851019030524','5');
+INSERT INTO `barcode` VALUES ('4','8850468208058','6');
+INSERT INTO `barcode` VALUES ('5','8851019010199','7');
+INSERT INTO `barcode` VALUES ('6','8851019010137','8');
+INSERT INTO `barcode` VALUES ('7','8851019010144','9');
+INSERT INTO `barcode` VALUES ('8','8851019010298','10');
+INSERT INTO `barcode` VALUES ('9','8852008300000','11');
+INSERT INTO `barcode` VALUES ('10','8852044110366','12');
+INSERT INTO `barcode` VALUES ('11','8850987128301','13');
+INSERT INTO `barcode` VALUES ('12','8850987142321','14');
+INSERT INTO `barcode` VALUES ('13','8850987101021','15');
+INSERT INTO `barcode` VALUES ('14','8858891300073','16');
+INSERT INTO `barcode` VALUES ('15','8851952101305','17');
+INSERT INTO `barcode` VALUES ('16','8858998581139','18');
+INSERT INTO `barcode` VALUES ('17','8851959132012','19');
+INSERT INTO `barcode` VALUES ('18','8850267112129','20');
+INSERT INTO `barcode` VALUES ('19','8850718801886','21');
+INSERT INTO `barcode` VALUES ('20','8850718801473','22');
+INSERT INTO `barcode` VALUES ('21','8850587000274','23');
+INSERT INTO `barcode` VALUES ('22','8850587000427','24');
+INSERT INTO `barcode` VALUES ('23','8850189016109','25');
 CREATE TABLE `athletic` (
   `ath_id` INTEGER PRIMARY KEY,
   `ath_name` varchar(30) NOT NULL,
   `ath_bph` int(11) DEFAULT '0'
 );
-INSERT INTO `athletic` VALUES ('1','วิ่ง','100');
+INSERT INTO `athletic` VALUES ('1','กรรเชียงเรือด้วยความเร็ว 17.6กม./ชม.','970');
+INSERT INTO `athletic` VALUES ('2','กรรเชียงเรือด้วยความเร็ว 5.6กม./ชม.','660');
+INSERT INTO `athletic` VALUES ('3','กระโดดเชือก','780');
+INSERT INTO `athletic` VALUES ('4','กวาดพื้น','225');
+INSERT INTO `athletic` VALUES ('5','การเต้น Zumba','500');
+INSERT INTO `athletic` VALUES ('6','ขี่จักรยาน','450');
+INSERT INTO `athletic` VALUES ('7','ซักผ้าด้วยมือ','240');
+INSERT INTO `athletic` VALUES ('8','ตีกอล์ฟ ลากถุงกอล์ฟ','300');
+INSERT INTO `athletic` VALUES ('9','ตีกอล์ฟ แบกถุงกอล์ฟเอง','360');
+INSERT INTO `athletic` VALUES ('10','ตีกอล์ฟ, นั่งรถ','240');
+INSERT INTO `athletic` VALUES ('11','ทำงานบ้าน','200');
+INSERT INTO `athletic` VALUES ('12','ทำสวน','300');
+INSERT INTO `athletic` VALUES ('13','นอนหลับ','75');
+INSERT INTO `athletic` VALUES ('14','นั่งดูทีวี','100');
+INSERT INTO `athletic` VALUES ('15','นั่งทำงานใช้สมอง','110');
+INSERT INTO `athletic` VALUES ('16','บาสเก็ตบอล','600');
+INSERT INTO `athletic` VALUES ('17','ปูที่นอน','135');
+INSERT INTO `athletic` VALUES ('18','มวยไทย','800');
+INSERT INTO `athletic` VALUES ('19','ยืน','140');
+INSERT INTO `athletic` VALUES ('20','รีดผ้า','150');
+INSERT INTO `athletic` VALUES ('21','ลงนอน (ไม่หลับ)','85');
+INSERT INTO `athletic` VALUES ('22','วิ่งบนทางราบด้วยความเร็ว','1100');
+INSERT INTO `athletic` VALUES ('23','วิ่งเหยาะๆ','600');
+INSERT INTO `athletic` VALUES ('24','เลื่อยไม้','515');
+INSERT INTO `athletic` VALUES ('25','เล่นวอลเล่ย์บอล','300');
+INSERT INTO `athletic` VALUES ('26','เล่นสเก็ตปกติ','420');
+;
 COMMIT;

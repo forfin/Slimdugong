@@ -59,13 +59,19 @@ public class SelectDishActivity extends ActionBarActivity {
                 .setText(R.string.select_dish_recent)
                 .setTabListener(new mTab());
     	actionBar.addTab(recent_tab);
+    	
+    	ArrayList<FoodType> ftlist = app.getFoodTypeList();
+    	FoodType ft0 = ftlist.remove(0);
+    	ftlist.add(ft0);
         
-        for(FoodType ft:app.getFoodTypeList()){
-        	Tab tab = actionBar.newTab()
-        			.setTag(ft.getFoodTypeId())
-                    .setText(ft.getFoodTypeName())
-                    .setTabListener(new mTab());
-        	actionBar.addTab(tab);
+        for(FoodType ft:ftlist){
+        	if(ft.getFoodTypeId()!=0){
+        		Tab tab = actionBar.newTab()
+            			.setTag(ft.getFoodTypeId())
+                        .setText(ft.getFoodTypeName())
+                        .setTabListener(new mTab());
+            	actionBar.addTab(tab);
+        	}        	
         }       
 
     }
@@ -212,8 +218,13 @@ public class SelectDishActivity extends ActionBarActivity {
                .setPositiveButton(R.string.defualt_ok, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                 	   Consume c = new Consume(Integer.valueOf(food.getFoodId()), new Date());
-                	   c.setFoodEnergy(mDatabaseManager.getFoodById(food.getFoodId()).getFoodCal());
+                	   c.setFoodEnergy(food.getFoodCal());
                 	   mDatabaseManager.consumeCommit(c);
+                	   
+                	   Toast.makeText(SelectDishActivity.this, food.getFoodName() + " "
+                			   + food.getFoodCal() + getText(R.string.select_dish_calories), 
+                			   Toast.LENGTH_SHORT).show();
+                	   
                    }
                })
                .setNegativeButton(R.string.defualt_cancel, new DialogInterface.OnClickListener() {
