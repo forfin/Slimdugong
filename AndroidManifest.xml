@@ -68,6 +68,7 @@
             android:name=".CreateCharacterActivity"
             android:label="@string/create_character" >
         </activity>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 
 </manifest>

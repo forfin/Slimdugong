@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">SlimDugong</string>
+    <string name="facebook_app_id">1456855687868401</string>
     
     <string name="defualt_ok">OK</string>    
     <string name="defualt_cancel">Cancel</string>

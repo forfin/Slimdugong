@@ -63,11 +63,14 @@ public class StatusController {
 	}
 	
 	private static long difference(Date d1){
-		return difference(currentDate, d1);
+		return difference(d1, currentDate);
 	}
 	
 	public int getCurrentConsumeStatus(){
-		long hour = difference(lastConsumeDate)/60;
+		long hour = difference(lastConsumeDate)/3600;
+//		System.err.println("lastConsumeDate = " + lastConsumeDate.toLocaleString());
+//		System.err.println("currentDate = " + currentDate.toLocaleString());
+//		System.err.println("difference(lastConsumeDate) = " + difference(lastConsumeDate));
 		if(hour<6){
 			// Fully
 			return 0;
@@ -81,7 +84,7 @@ public class StatusController {
 	}
 	
 	public int getCurrentExerciseStatus(){
-		long hour = difference(lastExerciseDate)/60;
+		long hour = difference(lastExerciseDate)/3600;
 		if(hour<24){
 			// Strong
 			return 0;
