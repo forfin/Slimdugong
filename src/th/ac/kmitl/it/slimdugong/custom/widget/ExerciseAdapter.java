@@ -1,8 +1,10 @@
 package th.ac.kmitl.it.slimdugong.custom.widget;
 
+import java.util.Date;
 import java.util.List;
 
 import th.ac.kmitl.it.slimdugong.R;
+import th.ac.kmitl.it.slimdugong.StatusController;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Exercise;
@@ -39,7 +41,22 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
 	    chk_title.setText(user.getAthName());
 	    chk_descripe.setText(R.string.select_dish_calories);
 	    chk_descripe.setText(user.getEnegyBurn().toString()+" "+chk_descripe.getText());
-	    chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getExerTime()));	    
+	    
+	    long sec = StatusController.difference(user.getExerTime(), new Date());
+	    long min = sec/60;
+	    long hour = min/60;
+	    
+	    chk_descripe2.setText(R.string.default_ago);
+	    if(sec<60){
+	    	chk_descripe2.setText(sec+" "+chk_descripe2.getText().toString());
+	    }else if(min<60){
+	    	chk_descripe2.setText(min+" "+chk_descripe2.getText().toString());
+	    }else if(hour<24){
+	    	chk_descripe2.setText(hour+" "+chk_descripe2.getText().toString());
+	    }else{
+	    	chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getExerTime()));	    
+	    }
+	    
 	    // Return the completed view to render on screen
 	    return convertView;
 	}

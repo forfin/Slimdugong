@@ -225,7 +225,7 @@ public class SelectDishActivity extends ActionBarActivity {
                 	   mDatabaseManager.consumeCommit(c);
                 	   
                 	   Toast.makeText(SelectDishActivity.this, food.getFoodName() + " "
-                			   + food.getFoodCal() + getText(R.string.select_dish_calories), 
+                			   + food.getFoodCal() + " " + getText(R.string.select_dish_calories), 
                 			   Toast.LENGTH_SHORT).show();
                 	   
                    }

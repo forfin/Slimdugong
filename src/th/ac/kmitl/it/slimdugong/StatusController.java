@@ -58,11 +58,11 @@ public class StatusController {
 		lastExerciseDate = SlimDugong.getInstance().getDatabase().getLastExerciseDate();
 	}
 	
-	private static long difference(Date d1, Date d2){
+	public static long difference(Date d1, Date d2){
 		return (d2.getTime()-d1.getTime())/1000;
 	}
 	
-	private static long difference(Date d1){
+	public static long difference(Date d1){
 		return difference(d1, currentDate);
 	}
 	

@@ -150,7 +150,7 @@ public class ExerciseActivity extends ActionBarActivity {
         	SeekBar sb = (SeekBar)view.findViewById(R.id.dialog_exercise_seekbar);        	
         	final TextView tv = (TextView)view.findViewById(R.id.dialog_exercise_text);
         	tv.setTag(DEFUALT_TIME_EXERCISE);        	
-        	tv.setText(DEFUALT_TIME_EXERCISE/TO_HOUR + " " + getText(R.string.exercise_hours));
+        	tv.setText(DEFUALT_TIME_EXERCISE/TO_HOUR + " " + getText(R.string.default_hours));
         	sb.setProgress((int) (DEFUALT_TIME_EXERCISE/PROCESS_MODIFICATION));
         	sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 				
@@ -172,11 +172,11 @@ public class ExerciseActivity extends ActionBarActivity {
 					int hour = time / TO_HOUR;
 					int minute = time - hour * TO_HOUR;
 					if(hour==0){
-						tv.setText(minute + " " + getText(R.string.exercise_miniutes));
+						tv.setText(minute + " " + getText(R.string.default_miniutes));
 					}else if(minute!=0){
-						tv.setText(hour + " " + getText(R.string.exercise_hours) + " " + minute + " " + getText(R.string.exercise_miniutes));
+						tv.setText(hour + " " + getText(R.string.default_hours) + " " + minute + " " + getText(R.string.default_miniutes));
 					}else{
-						tv.setText(hour + " " + getText(R.string.exercise_hours));
+						tv.setText(hour + " " + getText(R.string.default_hours));
 					}
 					tv.setTag(time);
 				}
@@ -199,7 +199,7 @@ public class ExerciseActivity extends ActionBarActivity {
                     	   mDatabaseManager.exerciseCommit(c);
                     	   
                     	   Toast.makeText(ExerciseActivity.this, ath.getAthName() + " "
-                    			   + c.getExerDuration() + getText(R.string.exercise_miniutes) + " "
+                    			   + c.getExerDuration() + getText(R.string.default_miniutes) + " "
                     			   + c.getEnegyBurn() + getText(R.string.select_dish_calories), 
                     			   Toast.LENGTH_SHORT).show();
                     	   

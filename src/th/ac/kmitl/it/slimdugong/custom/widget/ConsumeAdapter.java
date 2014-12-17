@@ -1,8 +1,10 @@
 package th.ac.kmitl.it.slimdugong.custom.widget;
 
+import java.util.Date;
 import java.util.List;
 
 import th.ac.kmitl.it.slimdugong.R;
+import th.ac.kmitl.it.slimdugong.StatusController;
 import th.ac.kmitl.it.slimdugong.database.entity.Athletic;
 import th.ac.kmitl.it.slimdugong.database.entity.local.Consume;
 import android.content.Context;
@@ -38,7 +40,21 @@ public class ConsumeAdapter extends ArrayAdapter<Consume>{
 	    chk_title.setText(user.getFoodName());
 	    chk_descripe.setText(R.string.select_dish_calories);
 	    chk_descripe.setText(user.getFoodEnergy().toString()+" "+chk_descripe.getText());
-	    chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getConsumeTime()));
+	    
+	    long sec = StatusController.difference(user.getConsumeTime(), new Date());
+	    long min = sec/60;
+	    long hour = min/60;
+	    
+	    chk_descripe2.setText(R.string.default_ago);
+	    if(sec<60){
+	    	chk_descripe2.setText(sec+" "+chk_descripe2.getText().toString());
+	    }else if(min<60){
+	    	chk_descripe2.setText(min+" "+chk_descripe2.getText().toString());
+	    }else if(hour<24){
+	    	chk_descripe2.setText(hour+" "+chk_descripe2.getText().toString());
+	    }else{
+	    	chk_descripe2.setText(DateFormat.getDateFormat(getContext()).format(user.getConsumeTime()));	    
+	    }
 	    // Return the completed view to render on screen
 	    return convertView;
 	}

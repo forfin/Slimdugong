@@ -26,8 +26,10 @@
     <string name="exercise_tab">Exercise</string>
     <string name="consume_tab">Consume</string>
     <string name="exercise_bph">BPH</string>
-    <string name="exercise_hours">hour(s)</string>
-    <string name="exercise_miniutes">minute(s)</string>
+    <string name="default_hours">hour(s)</string>
+    <string name="default_miniutes">minute(s)</string>
+    <string name="default_seconds">second(s)</string>
+    <string name="default_ago">ago</string>
     
     <string name="update_action">Update</string>
     <string name="update_on_checking">Checking for update&#8230;</string>
