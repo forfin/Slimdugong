@@ -221,6 +221,7 @@ public class SelectDishActivity extends ActionBarActivity {
                    public void onClick(DialogInterface dialog, int id) {
                 	   Consume c = new Consume(Integer.valueOf(food.getFoodId()), new Date());
                 	   c.setFoodEnergy(food.getFoodCal());
+                	   c.setFoodName(food.getFoodName());
                 	   mDatabaseManager.consumeCommit(c);
                 	   
                 	   Toast.makeText(SelectDishActivity.this, food.getFoodName() + " "

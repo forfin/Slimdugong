@@ -195,6 +195,7 @@ public class ExerciseActivity extends ActionBarActivity {
                     	   c.setEnegyBurn(energy.intValue());
                     	   c.setExerTime(new Date());
                     	   c.setExerDuration(time.intValue());
+                    	   c.setAthName(ath.getAthName());
                     	   mDatabaseManager.exerciseCommit(c);
                     	   
                     	   Toast.makeText(ExerciseActivity.this, ath.getAthName() + " "
