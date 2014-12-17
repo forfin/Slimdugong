@@ -36,7 +36,6 @@ public class MainActivity extends ActionBarActivity {
 	private TextView burn_num;
 	private CharacterMainView character_view;
 	private ImageButton share_facebook;
-	private String fbPhotoAddress;
 	
 	private UiLifecycleHelper uiHelper;
 	
@@ -100,51 +99,16 @@ public class MainActivity extends ActionBarActivity {
 		share_facebook.setOnClickListener(new OnClickListener() {
 		
 		        public void onClick(View arg0) {
-		        	uploadImgView(character_view);
-		        	FacebookDialog shareDialog = builder.setPicture(fbPhotoAddress)
-		        		.build();
+		        	FacebookDialog shareDialog = builder
+		        			.setDescription(
+		        					String.format(
+		        							getText(R.string.facebook_shared_message).toString(),
+		        							consume_num.getText().toString(),
+		        							burn_num.getText().toString()))
+		        			.build();
 		    		uiHelper.trackPendingDialogCall(shareDialog.present());
 		        }
 		});
-    }
-    
-    Request.Callback uploadPhotoRequestCallback = new Request.Callback() {
-        @Override
-        public void onCompleted(Response response) {
-            if (response.getError() != null) { 
-                //post error
-            } else{
-                 String idRploadResponse = (String) response.getGraphObject().getProperty("id");
-                 if (idRploadResponse!= null) { 
-
-                    fbPhotoAddress = "https://www.facebook.com/photo.php?fbid=" +idRploadResponse;                             
-                 } else { 
-                       //error
-                 } 
-
-            }
-        }
-    };
-    
-    public static Bitmap loadBitmapFromView(View v) {
-        Bitmap b = Bitmap.createBitmap( v.getLayoutParams().width, v.getLayoutParams().height, Bitmap.Config.ARGB_8888);                
-        Canvas c = new Canvas(b);
-        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-        v.draw(c);
-        return b;
-    }
-    
-    private void uploadImgView(View v) {
-        Bitmap img = loadBitmapFromView(v);
-
-        if (img != null) {
-            Request request = Request.newUploadPhotoRequest(Session.getActiveSession(), img,  uploadPhotoRequestCallback);
-//            Bundle parameters = request.getParameters(); // <-- THIS IS IMPORTANT
-////            parameters.putString("message", "My message");
-//            // add more params here
-//            request.setParameters(parameters);
-            request.executeAndWait();
-        }
     }
     
     @Override
