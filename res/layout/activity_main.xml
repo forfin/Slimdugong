@@ -7,93 +7,105 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="th.ac.kmitl.it.slimdugong.MainActivity" >
-<!-- th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView -->
+
+    <!-- th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView -->
+
     <th.ac.kmitl.it.slimdugong.custom.view.CharacterMainView
         android:id="@+id/character_view"
         android:layout_width="200dp"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/character_view"
-        android:layout_marginTop="33dp"
-        android:layout_marginLeft="215dp"
-        android:text="TEST01"
-        android:textSize="20dp" />
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/statsname" >
 
-    <TextView
-        android:id="@+id/consume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/statsname"
-        android:layout_below="@+id/statsname"
-        android:layout_marginTop="16dp"
-        android:text="บริโภค :" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/burn_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/burn"
-        android:layout_alignBottom="@+id/burn"
-        android:layout_toLeftOf="@+id/status_workout"
-        android:text="3434534" />
+            <TextView
+                android:id="@+id/consume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="บริโภค :" />
 
-    <TextView
-        android:id="@+id/msg_box"
+            <TextView
+                android:id="@+id/consume_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="3434534" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/bmi_carolies" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/burn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="เผาผลาญ :" />
+
+            <TextView
+                android:id="@+id/burn_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="3434534" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/bmi_carolies" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal" >
+
+            <ImageButton
+                android:id="@+id/bth_share_facebook"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_span="3"
+                android:background="@drawable/btn_share" />
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
-        android:layout_marginTop="28dp"
+        android:layout_height="100dp"
         android:layout_toRightOf="@+id/character_view"
-        android:background="@drawable/msg_box" />
+        android:background="@drawable/msg_box" >
 
-    <TextView
-        android:id="@+id/status_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/msg_box"
-        android:layout_marginBottom="69dp"
-        android:layout_marginLeft="210dp"
-        android:text="หิวจังเลย" />
-
-    <TextView
-        android:id="@+id/consume_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/consume"
-        android:layout_alignBottom="@+id/consume"
-        android:layout_alignLeft="@+id/burn_num"
-        android:text="324324" />
-
-    <TextView
-        android:id="@+id/burn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/consume"
-        android:layout_below="@+id/consume"
-        android:layout_marginTop="15dp"
-        android:text="เผาผลาญ :" />
-
-    <ImageButton
-        android:id="@+id/status_workout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/msg_box"
-        android:layout_toRightOf="@+id/character_view"
-        android:background="@android:color/transparent"
-        android:src="@drawable/status_workout_green" />
-
-    <ImageButton
-        android:id="@+id/bth_share_facebook"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_alignBottom="@+id/statsname"
-        android:layout_alignLeft="@+id/consume_num"
-        android:layout_alignRight="@+id/msg_box"
-        android:background="@drawable/btn_share" />
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/msg_box"
+            android:gravity="center"
+            android:paddingLeft="5sp"
+            android:paddingRight="5sp"
+            android:text="หิวจังเลยยกินไรบ้างงง" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/statsname"
@@ -104,34 +116,37 @@
         android:layout_marginTop="26dp"
         android:layout_toLeftOf="@+id/imageButton1"
         android:text="สถิติรายวัน"
-        android:textSize="20dp" 
-        android:textStyle="bold"/>
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <ImageButton
-        android:id="@+id/status_eat"
+        android:id="@+id/status_eat2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/msg_box"
+        android:layout_alignRight="@+id/relativeLayout1"
         android:layout_alignTop="@+id/status_workout"
         android:background="@android:color/transparent"
         android:src="@drawable/status_eat_gray" />
 
     <TextView
-        android:id="@+id/carolies1"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/consume_num"
-        android:layout_alignBottom="@+id/consume_num"
-        android:layout_alignRight="@+id/name"
-        android:text="@string/bmi_carolies" />
+        android:layout_above="@+id/status_eat2"
+        android:layout_alignRight="@+id/relativeLayout1"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_toRightOf="@+id/character_view"
+        android:text="TEST01"
+        android:textSize="20dp" 
+        android:gravity="center"/>
 
-    <TextView
-        android:id="@+id/carolies2"
+    <ImageButton
+        android:id="@+id/status_workout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/burn_num"
-        android:layout_alignBottom="@+id/burn_num"
-        android:layout_alignLeft="@+id/carolies1"
-        android:text="@string/bmi_carolies" />
+        android:layout_above="@+id/statsname"
+        android:layout_toRightOf="@+id/character_view"
+        android:background="@android:color/transparent"
+        android:src="@drawable/status_workout_green" />
 
-</RelativeLayout> 
+</RelativeLayout>

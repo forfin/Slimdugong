@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
         
         status_text = (TextView) findViewById(R.id.status_text);
     	status_workout = (ImageButton) findViewById(R.id.status_workout);
-    	status_eat = (ImageButton) findViewById(R.id.status_eat);
+    	status_eat = (ImageButton) findViewById(R.id.status_eat2);
     	consume_num = (TextView) findViewById(R.id.consume_num);
     	burn_num = (TextView) findViewById(R.id.burn_num);
     	character_view = (CharacterMainView) findViewById(R.id.character_view);
