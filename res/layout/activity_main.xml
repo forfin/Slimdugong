@@ -100,7 +100,6 @@
             android:id="@+id/status_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignTop="@+id/msg_box"
             android:gravity="center"
             android:paddingLeft="5sp"
             android:paddingRight="5sp"
@@ -114,7 +113,6 @@
         android:layout_below="@+id/character_view"
         android:layout_marginRight="20dp"
         android:layout_marginTop="26dp"
-        android:layout_toLeftOf="@+id/imageButton1"
         android:text="สถิติรายวัน"
         android:textSize="20dp"
         android:textStyle="bold" />
