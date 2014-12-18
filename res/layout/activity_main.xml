@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/msg_box"
         android:layout_marginBottom="69dp"
-        android:layout_marginLeft="220dp"
+        android:layout_marginLeft="210dp"
         android:text="หิวจังเลย" />
 
     <TextView
@@ -104,7 +104,8 @@
         android:layout_marginTop="26dp"
         android:layout_toLeftOf="@+id/imageButton1"
         android:text="สถิติรายวัน"
-        android:textSize="20dp" />
+        android:textSize="20dp" 
+        android:textStyle="bold"/>
 
     <ImageButton
         android:id="@+id/status_eat"
@@ -115,4 +116,22 @@
         android:background="@android:color/transparent"
         android:src="@drawable/status_eat_gray" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/carolies1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/consume_num"
+        android:layout_alignBottom="@+id/consume_num"
+        android:layout_alignRight="@+id/name"
+        android:text="@string/bmi_carolies" />
+
+    <TextView
+        android:id="@+id/carolies2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/burn_num"
+        android:layout_alignBottom="@+id/burn_num"
+        android:layout_alignLeft="@+id/carolies1"
+        android:text="@string/bmi_carolies" />
+
+</RelativeLayout> 

@@ -59,6 +59,7 @@
 	<string name ="bmi_result_6">โรคอ้วนขั้นสูงสุด</string>
 	<string name ="bmi_thin_name">ผอม</string>
 	<string name ="bmi_fat_name">อ้วน</string>
+	<string name ="bmi_carolies">แคลอรี่</string>
 	
 	<string name="edit_character">แก้ไขข้อมูลตัวละคร</string>
 	<string name="edit_character_action">แก้ไขข้อมูลตัวละคร</string>
